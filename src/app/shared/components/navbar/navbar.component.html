@@ -50,6 +50,22 @@
         <div class="flex flex-shrink-0 items-center mr-3">
           <app-brand />
         </div>
+        <div class="hidden sm:ml-6 sm:block sm:mr-4">
+          <ul class="flex space-x-4 mt-1">
+            @for(navlink of navlinks; track $index) {
+            <li
+              routerLinkActive="px-3 border-b-2 border-b-[#1D3EB5] pb-2"
+              class="cursor-pointer"
+            >
+              <a [routerLink]="navlink.link">
+                <span class="text-base font-medium text-black">
+                  {{ navlink.label }}
+                </span>
+              </a>
+            </li>
+            }
+          </ul>
+        </div>
         <app-searchbar class="hidden sm:ml-6 sm:block" />
       </div>
 
