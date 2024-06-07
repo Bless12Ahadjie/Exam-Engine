@@ -17,5 +17,11 @@
 			stroke="#A6A6AB"
 		/>
 	</svg>
-
+	<input
+		type="text"
+		placeholder="Search"
+		[(ngModel)]="searchTerm"
+		(ngModelChange)="handleSearchFilter($event)"
+		class="border-none outline-none"
+	/>
 </div>
