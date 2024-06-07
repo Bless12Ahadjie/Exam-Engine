@@ -1,0 +1,67 @@
+<div class="flex justify-between items-center w-[100%] h-full">
+
+  <div class="flex flex-col items-center p-[24px] w-[50%]">
+    <div class="w-[414px] h-[Hug(544px)">
+      <div class="flex flex-col gap-[24px] items-center">
+        <div class="flex flex-col gap-[24px]">
+          <div>
+            <p class="text-[32px] text-[#101828] font-semibold paragraph">Sign in to your Account</p>
+            <p class="text-[#000000] text-[14px] font-light">Welcome back! Select method to Sign in </p>
+          </div>
+          <!-- google log in -->
+          <div class="flex w-[100%] h-[40px] border-[#91959C] rounded-md border-2 justify-center items-center cursor-pointer">
+            Continue with Google
+          </div>
+        </div>
+
+        <!-- or seperator -->
+        <div class="flex w-[360px] gap-[24px] justify-center items-center">
+          <div class="w-[100%] h-[1px] bg-[#91959C]">
+          </div>
+
+          <p class="text-[#101828] text-[14px] w-[300px] text-nowrap">Or continue with email</p>
+
+          <div class="w-[100%] h-[1px] bg-[#91959C]">
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="">
+        <form class="flex flex-col pl-[24px] gap-[24px]" action="">
+          <div class="flex flex-col justify-center items-start">
+            <label for="email">Email *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="">
+          </div>
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="password">Password *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="">
+          </div>
+
+          <div>
+            <p class="text-[#283ADD]">forgot password</p>
+          </div>
+
+          <div >
+            <button class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white" >Sign in</button>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <p>Don't have an account? <span class="text-[#283ADD] cursor-pointer"  [routerLink]="['/singup']" >Create an account</span></p>
+          </div>
+
+        </form>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="w-[50%] h-screen">
+   <img class="h-[605px] 2xl:h-[965px] w-fit" src="../../../../../assets/Login-img.png" alt="">
+  </div>
+
+</div>
