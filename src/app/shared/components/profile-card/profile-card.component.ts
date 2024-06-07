@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { INavlinks } from '../navbar/navbar.interface';
 import { RouterLink } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './profile-card.component.scss'
 })
 export class ProfileCardComponent {
+  @Output() emitMenu: EventEmitter<string> = new EventEmitter();
   public cardItems: INavlinks[] = [
     {
       label: 'Your Profile',
@@ -20,4 +21,8 @@ export class ProfileCardComponent {
       link: '/settings'
     }
   ];
+
+  public onMenuClick(menu: string): void {
+    this.emitMenu.emit(menu);
+  }
 }
