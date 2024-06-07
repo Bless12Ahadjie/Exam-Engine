@@ -1,0 +1,60 @@
+<div class="flex justify-between items-center w-[100%] h-full">
+
+  <div class="flex flex-col items-center p-[24px] w-[50%]">
+    <div class="w-[414px] h-[Hug(544px)">
+      <div class="flex flex-col gap-[24px] items-center mb-[3%] ">
+        <div class="flex flex-col gap-[24px]">
+          <div>
+            <p class="text-[32px] text-[#101828] font-semibold paragraph">Sign up for your Account</p>
+            <p class="text-[#000000] text-[14px] font-light">Hello there! Kindly fill in all fields appropriately </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="">
+        <form class="flex flex-col pl-[18px] gap-[24px]" action="">
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="email">Name *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="">
+          </div>
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="email">Email *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="">
+          </div>
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="password">Password *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="">
+          </div>
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="password" >Confirm Password *</label>
+            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="">
+          </div>
+
+          <div >
+            <button class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white" >Sign up</button>
+          </div>
+
+          <div class="flex flex-col items-center">
+            <p>Already have an account? <span class="text-[#283ADD] cursor-pointer" [routerLink]="['/login']" >Sign in</span></p>
+          </div>
+
+        </form>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="w-[50%] h-screen">
+   <img class="h-[605px] 2xl:h-[965px] w-fit" src="../../../../../assets/Login-img.png" alt="">
+  </div>
+
+</div>
