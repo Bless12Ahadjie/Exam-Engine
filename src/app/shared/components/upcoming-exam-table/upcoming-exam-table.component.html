@@ -1,0 +1,49 @@
+<div class="h-[190px]">
+  <div class="w-[100%] border-gray-300 shadow-md pb-3">
+    <table>
+      <thead class=" bg-[#F4F6FA] h-[48px] ">
+      <tr class="px-3">
+        @for(head of tableHead; track $index){
+        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66] pl-5">{{ head.name | titlecase}}</th>
+        <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{head.id | uppercase}}</th>
+        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.time | titlecase }}</th>
+        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.expire | titlecase }}</th>
+        <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{ head.update | titlecase }}</th>
+        }
+      </tr>
+      </thead>
+
+      <tr>
+
+      </tr>
+
+      <tbody >
+        @for (data of tablebody; track data.id){
+      <tr class="py-2">
+
+        <td class="flex justify-start items-center">
+          <img src="assets/icons/test-icon.svg">
+          {{data.test}}
+        </td>
+          <td>
+            {{data.id}}
+          </td>
+          <td>
+            {{data.time}}
+          </td>
+          <td>
+            {{data.expire}}
+          </td>
+          <td>
+            <button class="bg-[#283ADD] text-white py-1 px-[30px]">Start</button>
+          </td>
+
+
+      </tr>
+        }
+      </tbody>
+
+    </table>
+  </div>
+
+</div>
