@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
+import { Component,signal } from '@angular/core';
 import {TitleCasePipe, UpperCasePipe} from "@angular/common";
+import {StartMosalComponent} from "../start-mosal/start-mosal.component";
 
 @Component({
   selector: 'app-upcoming-exam-table',
   standalone: true,
   imports: [
     UpperCasePipe,
-    TitleCasePipe
+    TitleCasePipe,
+    StartMosalComponent
   ],
   templateUrl: './upcoming-exam-table.component.html',
   styleUrl: './upcoming-exam-table.component.scss'
 })
 export class UpcomingExamTableComponent {
+
+  isModalOpen = signal(false);
 
   tableHead = [
     {
@@ -39,5 +43,13 @@ export class UpcomingExamTableComponent {
       update: 'update'
     }
   ]
+
+
+
+  showModal(){
+    this.isModalOpen.update(()=> true)
+    console.log('clicked')
+  }
+
 
 }

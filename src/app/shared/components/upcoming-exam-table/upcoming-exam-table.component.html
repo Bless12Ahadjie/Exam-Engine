@@ -35,7 +35,7 @@
             {{data.expire}}
           </td>
           <td>
-            <button class="bg-[#283ADD] text-white py-1 px-[30px]">Start</button>
+            <button (click)="showModal()" class="bg-[#283ADD] text-white py-1 px-[30px]">Start</button>
           </td>
 
 
@@ -47,3 +47,9 @@
   </div>
 
 </div>
+
+@if(isModalOpen()){
+  <app-start-mosal>
+
+  </app-start-mosal>
+}
