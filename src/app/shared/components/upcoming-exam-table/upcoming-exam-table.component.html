@@ -49,8 +49,10 @@
 </div>
 
 
-@if(isModalOpen()){
-  <app-start-mosal>
+@if(isModalOpen){
+  <app-start-mosal
+  (isModalOpen)="closeModal($event)"
+  >
 
   </app-start-mosal>
 }

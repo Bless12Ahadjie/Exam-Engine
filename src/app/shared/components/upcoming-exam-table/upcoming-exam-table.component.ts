@@ -1,4 +1,4 @@
-import { Component,signal } from '@angular/core';
+import {Component} from '@angular/core';
 import {TitleCasePipe, UpperCasePipe} from "@angular/common";
 import {StartMosalComponent} from "../start-mosal/start-mosal.component";
 
@@ -15,7 +15,7 @@ import {StartMosalComponent} from "../start-mosal/start-mosal.component";
 })
 export class UpcomingExamTableComponent {
 
-  isModalOpen = signal(false);
+  isModalOpen = false;
 
   tableHead = [
     {
@@ -44,11 +44,15 @@ export class UpcomingExamTableComponent {
     }
   ]
 
+  closeModal($event: Event){
+    console.log($event)
+    this.isModalOpen = false
 
+  }
 
   showModal(){
-    this.isModalOpen.update(()=> true)
-    console.log('clicked')
+    this.isModalOpen = true;
+
   }
 
 
