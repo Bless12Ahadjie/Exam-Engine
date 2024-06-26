@@ -5,7 +5,7 @@ export const teacherNavLinks: INavLinks = {
     {
       title: 'Dashboard',
       defaultIconSrc: '/assets/icons/dashboard.svg',
-      routerLink: 'analytics',
+      routerLink: 'dashboard',
     },
     {
       title: 'Create Question',
@@ -22,7 +22,7 @@ export const teacherNavLinks: INavLinks = {
     {
       title: 'Settings',
       defaultIconSrc: '/assets/icons/settings.svg',
-      routerLink: 'account-settings',
+      routerLink: 'settings',
     },
   ],
 };
