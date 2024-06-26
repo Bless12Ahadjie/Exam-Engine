@@ -1,1 +1,14 @@
-<p>teacher works!</p>
+<div class="flex h-screen bg-white">
+  <!-- sidebar -->
+  <app-sidebar
+    [toggled]="isSidebarVisible()"
+    (closeEvent)="isSidebarVisible.set(false)"
+    [links]="links"
+  ></app-sidebar>
+  <div class="flex flex-1 flex-col">
+    <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+    <div class="w-full h-screen overflow-y-auto">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
