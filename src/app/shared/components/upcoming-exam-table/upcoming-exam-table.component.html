@@ -16,13 +16,12 @@
       <tr>
 
       </tr>
-
-      <tbody >
+      <tbody  >
         @for (data of tablebody; track data.id){
-      <tr class="py-2">
+      <tr class="py-2 mt-5">
 
         <td class="flex justify-start items-center">
-          <img src="assets/icons/test-icon.svg">
+          <img src="assets/icons/test-icon.svg" alt="test">
           {{data.test}}
         </td>
           <td>
@@ -35,7 +34,7 @@
             {{data.expire}}
           </td>
           <td>
-            <button (click)="showModal()" class="bg-[#283ADD] text-white py-1 px-[30px]">Start</button>
+            <button (click)="showModal()" class="bg-[#1849A9] text-white py-1 px-[30px] rounded-[4px]">Start</button>
           </td>
 
 
@@ -51,7 +50,7 @@
 
 @if(isModalOpen){
   <app-start-mosal
-  (isModalOpen)="closeModal($event)"
+  (closeModalEvent)="closeModal($event)"
   >
 
   </app-start-mosal>

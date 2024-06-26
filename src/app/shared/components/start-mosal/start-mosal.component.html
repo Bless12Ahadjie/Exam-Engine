@@ -1,16 +1,21 @@
-<div
+<div class="fixed inset-0 flex flex-col items-center justify-start pt-[5%] 2xl:pt-[141px] bg-[#7094F41F] bg-opacity-50 backdrop-blur-sm z-50">
 
-  class=" fixed inset-0 flex flex-col items-center justify-start pt-[5%] 2xl:pt-[141px] bg-[#7094F41F] bg-opacity-500 z-50 backdrop-blur-sm z-50"
-  >
-  <div class="modal-content flex justify-center items-center bg-white p-8 rounded-[16px] w-[854px] h-auto overflow-y-auto overflow-x-hidden">
-
-    <div class="flex items-center">
-      <img src="assets/rafiki.svg" alt="">
+  <div class="modal-content flex flex-col justify-center items-center bg-white p-8 rounded-[16px] w-[854px] h-auto overflow-y-auto overflow-x-hidden">
+    <div
+    (click)="closeModal()"
+    class="mt-2 flex justify-center items-center float-right pl-[100%] gap-2 cursor-pointer">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5.46967 5.46967C5.76256 5.17678 6.23744 5.17678 6.53033 5.46967L12 10.9393L17.4697 5.46967C17.7626 5.17678 18.2374 5.17678 18.5303 5.46967C18.8232 5.76256 18.8232 6.23744 18.5303 6.53033L13.0607 12L18.5303 17.4697C18.8232 17.7626 18.8232 18.2374 18.5303 18.5303C18.2374 18.8232 17.7626 18.8232 17.4697 18.5303L12 13.0607L6.53033 18.5303C6.23744 18.8232 5.76256 18.8232 5.46967 18.5303C5.17678 18.2374 5.17678 17.7626 5.46967 17.4697L10.9393 12L5.46967 6.53033C5.17678 6.23744 5.17678 5.76256 5.46967 5.46967Z" fill="#0F172A"/>
+      </svg>
     </div>
-    <div class="flex flex-col justify-center gap-5">
+ <div class="flex">
+  <div class="flex items-center">
+    <img src="assets/rafiki.svg" alt="exam sitting">
+  </div>
+  <div class="flex flex-col justify-center gap-5">
     <div class="flex flex-col justify-center items-start gap-3">
       <p class="font-bold text-[#404653] text-[20px]">Exam Mode Control Rule</p>
-      <ul class="list-disc pl-4  w-[440px] text-[#404653]">
+      <ul class="list-disc pl-4 w-[440px] text-[#404653]">
         <li>Do not use the microphone and webcam to monitor the examinee throughout the duration of the exam</li>
         <li>Students must show a photo ID before starting the exam.</li>
         <li>Uses human proctors to monitor students via webcams in real-time.</li>
@@ -19,16 +24,11 @@
         <li>Track and restrict browser activities to ensure compliance</li>
       </ul>
     </div>
-      <div class="mt-5 justify-center items-center float-right pl-[80%]">
-        <button class="bg-[#283ADD] text-white py-1 px-[30px] rounded-md ">Next</button>
-      </div>
+    <div class="mt-2 flex justify-center items-center float-right pl-[60%] gap-2">
 
+      <button class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
     </div>
-
-
-
   </div>
-
-
-
+ </div>
+  </div>
 </div>

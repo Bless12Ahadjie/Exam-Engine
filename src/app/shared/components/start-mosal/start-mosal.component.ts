@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener,Output} from '@angular/core';
+import {Component, EventEmitter,Output} from '@angular/core';
 
 @Component({
   selector: 'app-start-mosal',
@@ -8,17 +8,11 @@ import {Component, EventEmitter, HostListener,Output} from '@angular/core';
   styleUrl: './start-mosal.component.scss'
 })
 export class StartMosalComponent {
-  @Output() closeModalEvent = new EventEmitter<boolean>(false)
+  @Output() closeModalEvent = new EventEmitter<boolean>();
 
-  @HostListener('document:click', ['$event'])
-  public onClick(event: MouseEvent): void {
-    const clickedElement = event.target as HTMLElement;
-    const isClickedInsideModal = clickedElement.closest('.modal-content');
-    const isClickedInsideButton = clickedElement.closest('.cursor-pointer');
 
-    if (!isClickedInsideModal || !isClickedInsideButton) {
-      this.closeModalEvent.emit(false);
-    }
+  closeModal(){
+    this.closeModalEvent.emit(false);
   }
 
 }
