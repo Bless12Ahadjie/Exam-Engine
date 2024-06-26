@@ -3,6 +3,7 @@ import { StudentLayoutComponent } from './shared/pages/student-layout/student-la
 import { ConfirmationPage1Component } from './shared/components/confirmation-page-1/confirmation-page-1.component';
 import { StudentDashboardComponent } from './shared/components/student-dashboard/student-dashboard.component';
 import { AuthComponent } from './shared/pages/auth/auth.component';
+import { ConfirmationPage2Component } from './shared/components/confirmation-page-2/confirmation-page-2.component';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,10 @@ export const routes: Routes = [
         path: 'confirm-1',
         component: ConfirmationPage1Component
 
+      },
+      {
+        path: 'confirm-2',
+        component: ConfirmationPage2Component
       }
     ]
 

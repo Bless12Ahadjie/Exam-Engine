@@ -1,0 +1,98 @@
+<div class="mt-100px mx-auto max-w-[95rem] py-8 px-2 sm:px-6 lg:px-8">
+
+  <div class="flex justify-start gap-3">
+    <div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.25 11.9998L11.2045 3.04533C11.6438 2.60599 12.3562 2.60599 12.7955 3.04532L21.75 11.9998M4.5 9.74983V19.8748C4.5 20.4961 5.00368 20.9998 5.625 20.9998H9.75V16.1248C9.75 15.5035 10.2537 14.9998 10.875 14.9998H13.125C13.7463 14.9998 14.25 15.5035 14.25 16.1248V20.9998H18.375C18.9963 20.9998 19.5 20.4962 19.5 19.8748V9.74983M8.25 20.9998H16.5" stroke="#404653" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+
+    </div>
+    <div>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M16.2803 11.4697C16.5732 11.7626 16.5732 12.2374 16.2803 12.5303L8.78033 20.0303C8.48744 20.3232 8.01256 20.3232 7.71967 20.0303C7.42678 19.7374 7.42678 19.2626 7.71967 18.9697L14.6893 12L7.71967 5.03033C7.42678 4.73744 7.42678 4.26256 7.71967 3.96967C8.01256 3.67678 8.48744 3.67678 8.78033 3.96967L16.2803 11.4697Z" fill="#404653"/>
+        </svg>
+
+    </div>
+    <div class="cursor-pointer">
+      <p class="underline text-[#283ADD]">My exam</p>
+    </div>
+
+  </div>
+
+
+  <div class="w-[100%] mt-10 flex flex-col justify-center items-center">
+    <div class="w-[40%] flex flex-col mb-5 gap-10">
+     <p>
+      Kindly enable us record your screen and sounds to proceed with the exam
+     </p>
+
+     <div class="flex justify-between gap-3">
+      <div class="flex gap-3">
+
+      <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_954_673)">
+        <mask id="mask0_954_673" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="23" height="24">
+        <path d="M0 0H23V24H0V0Z" fill="white"/>
+        </mask>
+        <g mask="url(#mask0_954_673)">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.875 7.5H5.75L9.31787 3.777C9.67331 3.40621 10.1261 3.15371 10.6191 3.05142C11.112 2.94913 11.6229 3.00165 12.0873 3.20233C12.5516 3.40302 12.9485 3.74285 13.2278 4.17888C13.507 4.61491 13.6562 5.12755 13.6562 5.65199V18.348C13.6562 18.8724 13.507 19.3851 13.2278 19.8211C12.9485 20.2571 12.5516 20.597 12.0873 20.7977C11.6229 20.9983 11.112 21.0509 10.6191 20.9486C10.1261 20.8463 9.67331 20.5938 9.31787 20.223L5.75 16.5H2.875C2.1125 16.5 1.38124 16.1839 0.842068 15.6213C0.302901 15.0587 0 14.2956 0 13.5V10.5C0 9.70435 0.302901 8.94128 0.842068 8.37867C1.38124 7.81607 2.1125 7.5 2.875 7.5ZM20.3579 19.6545C19.9769 20.133 19.2898 20.1285 18.8686 19.6905C18.4489 19.251 18.4546 18.5415 18.8241 18.0555C20.1353 16.334 20.8474 14.199 20.8438 12C20.8474 9.80103 20.1353 7.66594 18.8241 5.9445C18.4546 5.4585 18.4489 4.749 18.8686 4.3095C19.2898 3.8715 19.9769 3.8685 20.3579 4.3455C22.0691 6.4962 23.004 9.20464 23 12C23 14.91 22.0081 17.577 20.3579 19.6545ZM17.2845 16.452C16.9309 16.9515 16.2409 16.947 15.8197 16.5075C15.3985 16.068 15.4114 15.3615 15.7334 14.838C16.2545 13.9913 16.5314 13.0062 16.5312 12C16.5312 10.9545 16.238 9.9795 15.7334 9.16199C15.4114 8.64 15.3985 7.93199 15.8197 7.4925C16.2409 7.05299 16.9309 7.0485 17.2859 7.548C18.1657 8.79299 18.6875 10.335 18.6875 12C18.6896 13.6026 18.1977 15.1635 17.2845 16.452Z" fill="black"/>
+        </g>
+        </g>
+        <defs>
+        <clipPath id="clip0_954_673">
+        <rect width="23" height="24" fill="white"/>
+        </clipPath>
+        </defs>
+        </svg>
+       <span>Voice</span>
+      </div>
+      <div >
+        <button (click)="toggleVoiceRecorder()" [ngClass]="{'bg-blue-600':istoggleVoiceRecorder}" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
+        <span
+        [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleVoiceRecorder}"
+        class="bg-white h-5 w-5 rounded-full transition-all duration-300"
+
+        ></span>
+        </button>
+
+       </div>
+
+     </div>
+     <div class="flex justify-between gap-3">
+      <div class="flex gap-3">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.9999 21.5999C14.546 21.5999 16.9878 20.5885 18.7881 18.7881C20.5885 16.9878 21.5999 14.546 21.5999 11.9999C21.5999 9.45382 20.5885 7.01203 18.7881 5.21168C16.9878 3.41133 14.546 2.3999 11.9999 2.3999C9.45382 2.3999 7.01203 3.41133 5.21168 5.21168C3.41133 7.01203 2.3999 9.45382 2.3999 11.9999C2.3999 14.546 3.41133 16.9878 5.21168 18.7881C7.01203 20.5885 9.45382 21.5999 11.9999 21.5999ZM9.5999 8.3999H14.3999C14.7182 8.3999 15.0234 8.52633 15.2484 8.75137C15.4735 8.97642 15.5999 9.28164 15.5999 9.5999V14.3999C15.5999 14.7182 15.4735 15.0234 15.2484 15.2484C15.0234 15.4735 14.7182 15.5999 14.3999 15.5999H9.5999C9.28164 15.5999 8.97642 15.4735 8.75137 15.2484C8.52633 15.0234 8.3999 14.7182 8.3999 14.3999V9.5999C8.3999 9.28164 8.52633 8.97642 8.75137 8.75137C8.97642 8.52633 9.28164 8.3999 9.5999 8.3999Z" fill="black"/>
+          </svg>
+
+        <span>Record screen</span>
+      </div>
+
+       <div >
+        <button (click)="toggleRecordScreen()" [ngClass]="{'bg-blue-600':istoggleRecord}" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
+        <span
+        [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleRecord}"
+        class="bg-white h-5 w-5 rounded-full transition-all duration-300"
+
+        ></span>
+        </button>
+
+       </div>
+
+     </div>
+    </div>
+  </div>
+
+
+  <div class="flex float-right  pl-[60%] gap-2  lg:mt-[12%] 2xl:mt-[35%]">
+    <button [routerLink]="['/student/confirm-2']" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
+
+  </div>
+  <div *ngIf="isRecording" class="recording-indicator">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="8" fill="#FF0000"/>
+      <circle cx="12" cy="12" r="4" fill="#FFFFFF"/>
+    </svg>
+    <span>Recording</span>
+  </div>
+
+</div>
