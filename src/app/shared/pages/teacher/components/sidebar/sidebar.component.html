@@ -1,1 +1,170 @@
-<p>sidebar works!</p>
+<div
+  id="sidebar"
+  [style.left]="toggled() ? '0' : '-100%'"
+  class="absolute top-0 z-50 h-screen flex-col duration-500 w-[80%] ease-in md:relative md:flex md:w-52 bg-white 2xl:w-64"
+>
+  <div class="hidden py-6 mx-auto md:block">
+    <app-brand size="20px" />
+  </div>
+  <button
+    type="button"
+    (click)="closeSidebar()"
+    class="close-icon absolute right-4 top-4 md:hidden"
+  >
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 14 14"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+        fill="#3D3939"
+      />
+    </svg>
+  </button>
+  <div class="flex flex-1 flex-col overflow-y-auto">
+    <nav class="flex-1 px-6 pt-10 md:px-2 md:py-4">
+      <ul>
+        @for (navLink of links().links; track $index) { @if (navLink.children) {
+        <button
+          class="mb-[4%] w-full 2xl:mb-[3%]"
+          (click)="openDropDownOnClick(navLink.routerLink)"
+        >
+          <a
+            [routerLink]="navLink.children[0].routerLink"
+            (click)="closeSidebar()"
+            class="flex items-center gap-3 p-2 font-Archivo hover:rounded-lg hover:bg-[#D7DAF9] hover:font-medium hover:text-[#283ADD]"
+          >
+            <div
+              [style]="
+                currentRoute().includes(navLink.routerLink)
+                  ? 'background-color: #5830EA; -webkit-mask: url(' +
+                    navLink.defaultIconSrc +
+                    ') no-repeat center;'
+                  : 'background-color: #000; -webkit-mask: url(' +
+                    navLink.defaultIconSrc +
+                    ') no-repeat center;'
+              "
+            >
+              <img
+                [src]="navLink.defaultIconSrc"
+                alt="icon"
+                class="opacity-0"
+              />
+            </div>
+            {{ navLink.title }}
+            <svg
+              width="8"
+              height="12"
+              viewBox="0 0 8 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1.07459 11.4419C0.808469 11.1979 0.808469 10.8021 1.07459 10.5581L5.5625 6.44194C5.82863 6.19786 5.82863 5.80214 5.5625 5.55806L1.07459 1.44194C0.80847 1.19786 0.80847 0.802137 1.07459 0.558058C1.34072 0.313981 1.77219 0.313981 2.03831 0.558058L6.52622 4.67418C7.32459 5.40641 7.32459 6.59359 6.52622 7.32582L2.03831 11.4419C1.77219 11.686 1.34072 11.686 1.07459 11.4419Z"
+                fill="#1C1C1C"
+                fill-opacity="0.2"
+              />
+            </svg>
+          </a>
+        </button>
+        } @else {
+        <li class="mb-[4%] 2xl:mb-[3%]">
+          <a
+            [routerLink]="navLink.routerLink"
+            routerLinkActive="bg-[#D7DAF9] text-[#283ADD] font-medium rounded-lg"
+            (click)="closeSidebar()"
+            class="flex items-center gap-3 p-2 font-Archivo hover:rounded-lg hover:bg-[#D7DAF9] hover:font-medium hover:text-[#283ADD]"
+          >
+            <div
+              [style]="
+                currentRoute().includes(navLink.routerLink)
+                  ? 'background-color: #5830EA; -webkit-mask: url(' +
+                    navLink.defaultIconSrc +
+                    ') no-repeat center;'
+                  : 'background-color: #000; -webkit-mask: url(' +
+                    navLink.defaultIconSrc +
+                    ') no-repeat center;'
+              "
+            >
+              <img
+                [src]="navLink.defaultIconSrc"
+                alt="icon"
+                class="opacity-0"
+              />
+            </div>
+            {{ navLink.title }}
+          </a>
+        </li>
+        } @if (navLink.children && isDropdownOpen(navLink.routerLink)) { @for
+        (childLink of navLink.children; track $index) {
+        <li class="mb-[1%] 2xl:mb-[1%]">
+          <a
+            [routerLink]="childLink.routerLink"
+            routerLinkActive="bg-[#D7DAF9] text-[#283ADD] font-medium rounded-lg"
+            (click)="closeSidebar()"
+            class="flex items-center gap-1 p-2 font-Archivo hover:rounded-lg hover:bg-[#D7DAF9] hover:font-medium hover:text-[#283ADD]"
+          >
+            <div
+              [style]="
+                currentRoute().includes(childLink.routerLink)
+                  ? 'background-color: #D7DAF9; -webkit-mask: url(' +
+                    childLink.defaultIconSrc +
+                    ') no-repeat center;'
+                  : 'background-color: #000; -webkit-mask: url(' +
+                    childLink.defaultIconSrc +
+                    ') no-repeat center;'
+              "
+            >
+              <img
+                [src]="childLink.defaultIconSrc"
+                alt="icon"
+                class="opacity-0"
+              />
+            </div>
+            {{ childLink.title }}
+          </a>
+        </li>
+        } } }
+      </ul>
+      <a
+        class="mt-2 flex cursor-pointer items-center p-2 font-Archivo hover:rounded-lg hover:bg-[#D7DAF9] hover:font-medium hover:text-[#283ADD] md:absolute md:bottom-[8%] md:left-2 md:right-2"
+      >
+        <svg
+          class="mr-3 h-6 w-6"
+          viewBox="0 0 25 25"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.94348 8.06023C9.25348 4.46023 11.1035 2.99023 15.1535 2.99023H15.2835C19.7535 2.99023 21.5435 4.78023 21.5435 9.25023V15.7702C21.5435 20.2402 19.7535 22.0302 15.2835 22.0302H15.1535C11.1335 22.0302 9.28348 20.5802 8.95348 17.0402"
+            stroke="#1A1A2A"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M15.0435 12.5H3.66345"
+            stroke="#1A1A2A"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M5.89346 9.15039L2.54346 12.5004L5.89346 15.8504"
+            stroke="#1A1A2A"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        Logout
+      </a>
+    </nav>
+  </div>
+</div>
