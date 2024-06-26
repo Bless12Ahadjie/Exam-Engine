@@ -68,7 +68,7 @@
       </div>
 
        <div >
-        <button (click)="toggleRecordScreen()" [ngClass]="{'bg-blue-600':istoggleRecord}" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
+        <button (click)="toggleRecordScreen()" [ngClass]="{'bg-blue-600':istoggleRecord }" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
         <span
         [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleRecord}"
         class="bg-white h-5 w-5 rounded-full transition-all duration-300"
@@ -84,7 +84,7 @@
 
 
   <div class="flex float-right  pl-[60%] gap-2  lg:mt-[12%] 2xl:mt-[35%]">
-    <button [routerLink]="['/student/confirm-2']" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
+    <button [routerLink]="['/student/exam']" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
 
   </div>
   <div *ngIf="isRecording" class="recording-indicator">

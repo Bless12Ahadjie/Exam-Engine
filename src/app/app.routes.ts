@@ -4,6 +4,7 @@ import { ConfirmationPage1Component } from './shared/components/confirmation-pag
 import { StudentDashboardComponent } from './shared/components/student-dashboard/student-dashboard.component';
 import { AuthComponent } from './shared/pages/auth/auth.component';
 import { ConfirmationPage2Component } from './shared/components/confirmation-page-2/confirmation-page-2.component';
+import { ExamPageComponent } from './shared/components/exam-page/exam-page.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,10 @@ export const routes: Routes = [
       {
         path: 'confirm-2',
         component: ConfirmationPage2Component
+      },
+      {
+        path:'exam',
+        component: ExamPageComponent
       }
     ]
 
