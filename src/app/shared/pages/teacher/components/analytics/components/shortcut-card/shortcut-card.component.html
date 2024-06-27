@@ -1,1 +1,11 @@
-<p>shortcut-card works!</p>
+<a
+  [routerLink]="props.link"
+  routerLinkActive="shadow-lg"
+  class="flex h-full w-full flex-col gap-y-4 rounded-lg border border-gray-border p-4 bg-white hover:bg-slate-50"
+>
+  <img [src]="props.iconSrc" alt="card icon" class="h-10 w-10" />
+
+  <p class="text-[#5D6679] text-xs">{{ props.label }}</p>
+
+  <span class="text-lg font-semibold text-[#404653]">{{ props.value }}</span>
+</a>
