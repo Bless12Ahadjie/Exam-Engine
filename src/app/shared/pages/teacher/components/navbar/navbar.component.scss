@@ -1,0 +1,11 @@
+#navbar {
+	border-bottom: 1px solid #d0d5dd;
+}
+
+$mobile-breakpoint: 640px;
+
+@media (max-width: $mobile-breakpoint) {
+	#navbar {
+		width: 100% !important;
+	}
+}
