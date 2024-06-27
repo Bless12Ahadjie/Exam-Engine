@@ -44,9 +44,8 @@ export class UpcomingExamTableComponent {
     }
   ]
 
-  closeModal($event: Event){
-    console.log($event)
-    this.isModalOpen = false
+  closeModal(event: boolean){
+    this.isModalOpen = event
 
   }
 
