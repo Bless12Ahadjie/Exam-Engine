@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IShortcutCard } from '../../interfaces/shortcut-card.interface';
 
 @Component({
   selector: 'app-shortcut-card-placeholder',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './shortcut-card-placeholder.component.scss'
 })
 export class ShortcutCardPlaceholderComponent {
-
+	@Input({ required: true }) props: Omit<IShortcutCard, 'value' | 'link'> = {
+		iconSrc: '',
+		label: '',
+	};
 }
