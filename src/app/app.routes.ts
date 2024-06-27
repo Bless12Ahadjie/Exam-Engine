@@ -5,6 +5,7 @@ import { StudentDashboardComponent } from './shared/components/student-dashboard
 import { AuthComponent } from './shared/pages/auth/auth.component';
 import { ConfirmationPage2Component } from './shared/components/confirmation-page-2/confirmation-page-2.component';
 import { ExamPageComponent } from './shared/components/exam-page/exam-page.component';
+import { TeacherComponent } from './shared/pages/teacher/teacher.component';
 
 export const routes: Routes = [
   {
@@ -27,24 +28,28 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: StudentDashboardComponent
-
+        component: StudentDashboardComponent,
       },
       {
         path: 'confirm-1',
-        component: ConfirmationPage1Component
-
+        component: ConfirmationPage1Component,
       },
       {
         path: 'confirm-2',
-        component: ConfirmationPage2Component
+        component: ConfirmationPage2Component,
       },
       {
-        path:'exam',
-        component: ExamPageComponent
-      }
-    ]
-
-
-  }
+        path: 'exam',
+        component: ExamPageComponent,
+      },
+    ],
+  },
+  {
+    path: 'teacher',
+    component: TeacherComponent,
+    loadChildren: () =>
+      import('../app/shared/pages/teacher/teacher.routes').then(
+        (teacher) => teacher.routes
+      ),
+  },
 ];
