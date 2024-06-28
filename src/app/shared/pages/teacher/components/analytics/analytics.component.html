@@ -1,0 +1,24 @@
+<section>
+  <div>
+    <h1 class="font-semibold text-lg">Dashboard</h1>
+  </div>
+
+  <div class="my-2">
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-5">
+      @for (shortcutCard of shortcutCards(); track $index) {
+      <app-shortcut-card
+        [props]="{
+          label: shortcutCard.label,
+          iconSrc: shortcutCard.iconSrc,
+          value: shortcutCard.value,
+          link: shortcutCard.link
+        }"
+      />
+      }
+    </div>
+  </div>
+
+  <main>
+    <router-outlet />
+  </main>
+</section>
