@@ -9,12 +9,12 @@ import {
 import { BrandComponent } from '../../../../components/brand/brand.component';
 import { INavLinks } from './sidebar.interface';
 import { Subscription, filter } from 'rxjs';
-import { Event, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Event, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [BrandComponent, RouterLink],
+  imports: [BrandComponent, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
 })
