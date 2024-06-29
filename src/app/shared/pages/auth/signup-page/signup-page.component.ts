@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {AuthService} from "../../../../services/auth/auth.service";
 
 @Component({
   selector: 'app-signup-page',
@@ -15,5 +16,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './signup-page.component.scss'
 })
 export class SignupPageComponent {
+  authService = inject(AuthService)
+  
 
 }
