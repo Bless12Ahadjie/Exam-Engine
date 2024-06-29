@@ -10,7 +10,7 @@ export const routes: Routes = [
     component: LoginPageComponent,
   },
   {
-    path: 'singup',
+    path: 'signup',
     component: SignupPageComponent,
   },
   {
@@ -21,5 +21,5 @@ export const routes: Routes = [
     path: 'change-password',
     component: ChangePasswordComponent,
   },
-  
+
 ];

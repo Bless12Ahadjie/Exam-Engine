@@ -1,3 +1,4 @@
+
 <div class="flex justify-between items-center w-[100%] h-full">
 
   <div class="flex flex-col items-center p-[24px] w-[50%]">
@@ -15,30 +16,105 @@
 
 
       <div class="">
-        <form class="flex flex-col pl-[18px] gap-[24px]" action="">
+        <form [formGroup]="form" class="flex flex-col pl-[18px] gap-[24px]" action="">
 
           <div class="flex flex-col justify-center items-start">
-            <label for="email">Name *</label>
-            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="">
+            <label >Name *</label>
+            <input  formControlName="username" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="name">
+            @if (username.invalid && username.errors && (username.touched ||
+              username.dirty)) {
+              <span>
+          @if(username.hasError('required')) {
+            <small class="text-sm text-red-500">
+            Username field cannot be empty.
+          </small>
+          } @if(username.hasError('minLength')) {
+                <small class="text-sm text-red-500">
+            Username must be at least 3 characters long.
+          </small>
+              } @if(username.hasError('invalidUsernameFormat')) {
+                <small class="text-sm text-red-500"> Username is invalid. </small>
+              }
+        </span>
+            }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="email">Email *</label>
-            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="">
+            <input  formControlName="email" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="email">
+          </div>
+
+          <div class="flex flex-col justify-center items-start">
+            <label for="email">Gender *</label>
+            <input  formControlName="gender" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="text" name="" id="gender">
+            @if (gender.invalid && gender.errors && (gender.touched ||
+              gender.dirty)) {
+              <span>
+          @if(gender.hasError('required')) {
+            <small class="text-sm text-red-500">
+            gender field cannot be empty.
+          </small>
+          } @if(gender.hasError('minLength')) {
+                <small class="text-sm text-red-500">
+            gender must be at least 3 characters long.
+          </small>
+              } @if(gender.hasError('invalidUsernameFormat')) {
+                <small class="text-sm text-red-500"> gender is invalid. </small>
+              }
+                @if (gender.value?.toLowerCase()!== "male" ||"female"){
+                  <small class="text-sm text-red-500">
+            Gender must be either "Male" or "Female"
+          </small>
+                }
+        </span>
+            }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="password">Password *</label>
-            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="">
+            <input  formControlName="password" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="password">
+            @if (password.errors && (password.touched || password.dirty)) {
+              <span>
+          @if(password.hasError('required')) {
+            <small class="text-sm text-red-500">
+            Password field cannot be empty.
+          </small>
+          } @if(password.hasError('minLength')) {
+                <small class="text-sm text-red-500">
+            Password length must be at least 8 characters long.
+          </small>
+              } @if(password.hasError('passwordStrength')) {
+                <small class="text-sm text-red-500">
+            Password must contain at least one uppercase letter, one lowercase
+            letter, one number, and one special character.
+          </small>
+              }
+        </span>
+            }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="password" >Confirm Password *</label>
-            <input class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="">
+            <input  formControlName="confirmPassword" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="confirmPassword">
+            @if (confirmPassword.errors && (confirmPassword.touched ||
+              confirmPassword.dirty)) {
+              <span>
+          @if(confirmPassword.hasError('required')) {
+            <small class="text-sm text-red-500">
+            Confirm Password field cannot be empty.
+          </small>
+          } @if(confirmPassword.hasError('confirmPasswordMismatch')) {
+                <small class="text-sm text-red-500">
+            Passwords does not match.
+          </small>
+              }
+        </span>
+            }
           </div>
 
           <div >
-            <button class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white" >Sign up</button>
+            <button (click)="register()" class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white" >Sign up</button>
+
           </div>
 
           <div class="flex flex-col items-center">

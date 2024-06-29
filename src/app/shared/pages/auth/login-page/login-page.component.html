@@ -32,25 +32,44 @@
       </div>
 
       <div class="">
-        <form class="flex flex-col pl-[24px] gap-[24px]" action="">
+        <form [formGroup]="form" class="flex flex-col pl-[24px] gap-[24px]" action="">
           <div class="flex flex-col justify-center items-start">
             <label for="email">Email *</label>
             <input
+              formControlName="username"
               class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
               type="email"
               name=""
-              id=""
+              id="email"
             />
+            @if (username.invalid && username.errors && (username.touched || username.dirty)) {
+              <span>
+          @if(username.hasError('required')) {
+            <small class="text-sm text-red-500"> Username is required. </small>
+          } @if(username.hasError('invalidUsernameFormat')) {
+                <small class="text-sm text-red-500"> Username is invalid. </small>
+              }
+        </span>
+            }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="password">Password *</label>
             <input
+              formControlName="password"
               class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
               type="password"
               name=""
-              id=""
+              id="password"
             />
+            @if (password.invalid && password.errors && (password.touched ||
+              password.dirty)) {
+              <span>
+          @if(password.hasError('required')) {
+            <small class="text-sm text-red-500"> Password is required. </small>
+          }
+        </span>
+            }
           </div>
 
           <div>
@@ -61,6 +80,7 @@
 
           <div>
             <button
+              (click)="login()"
               class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white"
             >
               Sign in
@@ -72,7 +92,7 @@
               Don't have an account?
               <span
                 class="text-[#283ADD] cursor-pointer"
-                [routerLink]="['/singup']"
+                [routerLink]="['/signup']"
                 >Create an account</span
               >
             </p>
