@@ -32,7 +32,7 @@ export class ExamPageComponent implements OnInit,OnDestroy {
         this.timeLeft--;
       } else {
         this.timerSubscription?.unsubscribe();
-        // Handle exam completion here
+        this.submitAnswer();
       }
     });
   }
