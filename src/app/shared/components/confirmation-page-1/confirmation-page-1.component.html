@@ -51,7 +51,7 @@
 
 
   <div class="flex float-right pl-[60%] gap-2 mb-16 mt-10">
-    <button [routerLink]="['/student/confirm-2']" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
+    <button [routerLink]="['/student/confirm-2']" [disabled]="!pictureTaken" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
 
   </div>
 

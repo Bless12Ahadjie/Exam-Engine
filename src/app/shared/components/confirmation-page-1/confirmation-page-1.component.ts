@@ -1,11 +1,11 @@
-import { NgIf } from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import { Component, OnInit, OnDestroy,  ViewChild, ElementRef} from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-confirmation-page-1',
   standalone: true,
-  imports: [RouterModule,NgIf],
+  imports: [RouterModule, NgIf, NgClass],
   templateUrl: './confirmation-page-1.component.html',
   styleUrl: './confirmation-page-1.component.scss'
 })
@@ -14,6 +14,7 @@ export class ConfirmationPage1Component implements OnInit, OnDestroy {
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
   videoStream: MediaStream | null = null;
   pictureTaken = false
+  isPictureTaken = false
   capturedImage: string | null = null;
   ngOnInit() {
     this.startCamera();
