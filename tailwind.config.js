@@ -2,7 +2,11 @@
 module.exports = {
     content: ["./src/**/*.{html,js}"],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          WorkSans: ["Work Sans", 'sans-serif'],
+        },
+      },
     },
     plugins: [],
   }
