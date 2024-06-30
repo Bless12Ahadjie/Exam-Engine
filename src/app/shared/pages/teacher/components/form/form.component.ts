@@ -20,6 +20,7 @@ export class FormComponent implements OnInit {
   outputQuestions = output<Question[]>();
   questions: Question[] = [];
   showTypePanelFor: number | null = null;
+  private dragSrcIndex: number | null = null;
 
   private elementRef!: ElementRef;
 
@@ -115,5 +116,43 @@ export class FormComponent implements OnInit {
     ) {
       this.showTypePanelFor = null;
     }
+  }
+
+  onDragStart(event: DragEvent, index: number): void {
+    this.dragSrcIndex = index;
+    if (event.dataTransfer) {
+      event.dataTransfer.setData('text/plain', index.toString());
+      event.dataTransfer.effectAllowed = 'move';
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+    event.dataTransfer!.dropEffect = 'move';
+  }
+
+  onDrop(event: DragEvent, index: number): void {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    }
+
+    const dragSrcIndex = this.dragSrcIndex;
+    if (dragSrcIndex !== null && dragSrcIndex !== index) {
+      /**
+       * Swap the elements in the questions array
+       */
+
+      [this.questions[dragSrcIndex], this.questions[index]] = [
+        this.questions[index],
+        this.questions[dragSrcIndex],
+      ];
+    }
+    this.dragSrcIndex = null;
+  }
+
+  onDragEnd(): void {
+    this.dragSrcIndex = null;
   }
 }

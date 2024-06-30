@@ -1,6 +1,14 @@
 <div>
   @for(question of questions; track question; let questionIndex = $index){
-  <div class="bg-white shadow-sm rounded-lg p-4 mb-4 relative">
+  <div
+    class="bg-white border border-[#91959C] shadow-sm rounded-lg p-4 mb-4 relative cursor-move"
+    [attr.data-index]="questionIndex"
+    draggable="true"
+    (dragstart)="onDragStart($event, questionIndex)"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event, questionIndex)"
+    (dragend)="onDragEnd()"
+  >
     <div class="flex justify-between items-center mb-2">
       <h3 class="text-md font-semibold">{{ question.label }}</h3>
       <div class="flex space-x-4">
