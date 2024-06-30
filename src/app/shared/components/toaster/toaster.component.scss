@@ -1,0 +1,82 @@
+$notification-color: #5830ead4;
+$success-color: #28a746d4;
+$error-color: #dc3546d4;
+$info-color: #17a3b8d4;
+$warning-color: #ffc107d4;
+
+@mixin toast-style($background-color) {
+	background-color: $background-color;
+	display: flex;
+	justify-content: space-between;
+	align-items: first baseline;
+	gap: 1rem;
+	padding: 15px;
+    margin-bottom: 0.5rem;
+	border-radius: 4px;
+	color: #fff;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	transition: opacity 0.3s ease-in-out;
+}
+
+@keyframes slide-in {
+	from {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+	to {
+		transform: translateX(0);
+		opacity: 1;
+	}
+}
+
+@keyframes slide-out {
+	from {
+		transform: translateX(0);
+		opacity: 1;
+	}
+	to {
+		transform: translateX(100%);
+		opacity: 0;
+	}
+}
+
+.toast-container {
+	position: fixed;
+	top: 10%;
+	right: 1%;
+	z-index: 9999;
+	border: none;
+	max-width: 300px;
+}
+
+.toast {
+    &.notification {
+		@include toast-style($notification-color);
+	}
+	&.success {
+		@include toast-style($success-color);
+	}
+	&.error {
+		@include toast-style($error-color);
+	}
+	&.info {
+		@include toast-style($info-color);
+	}
+	&.warning {
+		@include toast-style($warning-color);
+	}
+
+	animation: slide-in 0.5s forwards;
+
+	.close {
+		background: none;
+		border: none;
+		color: white;
+		font-size: 2em;
+		cursor: pointer;
+	}
+
+	&.slide-out {
+		animation: slide-out 0.5s forwards;
+	}
+}
