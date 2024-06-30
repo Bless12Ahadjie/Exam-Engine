@@ -1,4 +1,4 @@
-import { Component, ViewChild, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { FormComponent } from '../form/form.component';
 import { Question } from '../../interfaces/question.interface';
 
