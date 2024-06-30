@@ -4,12 +4,11 @@ export interface Options {
 }
 
 export interface Question {
-  id: number;
-  type: string;
+  type: 'multiple-choice' | 'text' | 'boolean' | 'checkboxes';
   text: string;
   label: string;
   options?: Options[];
-  correctAnswers?: string[] | number[];
+  correctAnswers: string[] | number[];
 }
 
 export interface ExamQuestion {

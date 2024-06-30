@@ -103,21 +103,26 @@ export class SignupPageComponent {
       this.authService.registerUser(registerDetails).subscribe(
         {
           next:(res)=> {
-            setTimeout(()=>{
-              this.toast.showSuccess("success")
-            },2000)
-            this.route.navigate(['/login'])
+            // setTimeout(()=>{
+            //   this.toast.showSuccess("success")
+            // },2000)
+            // this.route.navigate(['/login'])
           },
           error:(err)=> {
-            console.log(err)
-            setTimeout(()=>{
-              this.toast.showError(err.message)
-            },2000)
+            // console.log(err)
+            // setTimeout(()=>{
+            //   this.toast.showError(err.message)
+            // },2000)
           }
         }
       )
+    } else {
+      this.toast.showToast({
+        message: 'Passwords do not match',
+        type: 'error',
+        duration: 3000
+      })
     }
-    else return
 
 
   }
