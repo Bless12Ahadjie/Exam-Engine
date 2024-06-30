@@ -23,8 +23,30 @@
   <div class="w-[100%] mt-10 flex flex-col justify-center items-center">
     <div class="w-[40%] flex flex-col mb-5 gap-10">
      <p>
-      Kindly enable us record your screen and sounds to proceed with the exam
+      Kindly enable us record your screen, sound and surrounding before you can proceed with the exam
      </p>
+      <div class="flex justify-between gap-3">
+        <div class="flex gap-3">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11.9999 21.5999C14.546 21.5999 16.9878 20.5885 18.7881 18.7881C20.5885 16.9878 21.5999 14.546 21.5999 11.9999C21.5999 9.45382 20.5885 7.01203 18.7881 5.21168C16.9878 3.41133 14.546 2.3999 11.9999 2.3999C9.45382 2.3999 7.01203 3.41133 5.21168 5.21168C3.41133 7.01203 2.3999 9.45382 2.3999 11.9999C2.3999 14.546 3.41133 16.9878 5.21168 18.7881C7.01203 20.5885 9.45382 21.5999 11.9999 21.5999ZM9.5999 8.3999H14.3999C14.7182 8.3999 15.0234 8.52633 15.2484 8.75137C15.4735 8.97642 15.5999 9.28164 15.5999 9.5999V14.3999C15.5999 14.7182 15.4735 15.0234 15.2484 15.2484C15.0234 15.4735 14.7182 15.5999 14.3999 15.5999H9.5999C9.28164 15.5999 8.97642 15.4735 8.75137 15.2484C8.52633 15.0234 8.3999 14.7182 8.3999 14.3999V9.5999C8.3999 9.28164 8.52633 8.97642 8.75137 8.75137C8.97642 8.52633 9.28164 8.3999 9.5999 8.3999Z" fill="black"/>
+          </svg>
+
+          <span>Record surrounding</span>
+        </div>
+
+        <div >
+          <button (click)="toggleRecordSurrouding()"  [ngClass]="{'bg-blue-600':istoggleSurrounding, 'bg-slate-200':!istoggleSurrounding }" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full  p-1">
+        <span
+          [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleSurrounding}"
+          class="bg-white h-5 w-5 rounded-full transition-all duration-300"
+
+        ></span>
+          </button>
+
+        </div>
+
+      </div>
+
 
      <div class="flex justify-between gap-3">
       <div class="flex gap-3">
@@ -47,7 +69,7 @@
        <span>Voice</span>
       </div>
       <div >
-        <button (click)="toggleVoiceRecorder()" [ngClass]="{'bg-blue-600':istoggleVoiceRecorder}" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
+        <button (click)="toggleVoiceRecorder()" [ngClass]="{'bg-blue-600':istoggleVoiceRecorder ,'bg-slate-200': !istoggleVoiceRecorder}" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full  p-1">
         <span
         [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleVoiceRecorder}"
         class="bg-white h-5 w-5 rounded-full transition-all duration-300"
@@ -68,7 +90,7 @@
       </div>
 
        <div >
-        <button (click)="toggleRecordScreen()" [ngClass]="{'bg-blue-600':istoggleRecord }" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full bg-slate-200 p-1">
+        <button (click)="toggleRecordScreen()"  [ngClass]="{'bg-blue-600':istoggleRecord, 'bg-slate-200':!istoggleRecord }" class="relative flex h-6 w-12 cursor-pointer items-center rounded-full  p-1">
         <span
         [ngClass]="{'transition-all duration-300 translate-x-[100%]': istoggleRecord}"
         class="bg-white h-5 w-5 rounded-full transition-all duration-300"
@@ -84,7 +106,7 @@
 
 
   <div class="flex float-right  pl-[60%] gap-2  lg:mt-[12%] 2xl:mt-[35%]">
-    <button [routerLink]="['/student/exam']" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
+    <button [routerLink]="['/student/exam']" [disabled]="!istoggleVoiceRecorder && !istoggleRecord && istoggleSurrounding" routerLinkActive="router-link-active"  class="bg-[#1849A9] rounded-[4px] text-white py-1 px-[30px]">Next</button>
 
   </div>
   <div *ngIf="isRecording" class="recording-indicator">
