@@ -1,0 +1,130 @@
+<div class="bg-white shadow-sm rounded-lg p-4 mb-4">
+  <div class="flex justify-between items-center mb-2">
+    <h3 class="text-md font-semibold">{{ question.label }}</h3>
+    <div class="flex space-x-4">
+      <button
+        type="button"
+        (click)="duplicate.emit()"
+        class="hover:bg-gray-100 p-2 h-8 w-8 rounded-full flex justify-center items-center"
+      >
+        <svg
+          width="16"
+          height="18"
+          viewBox="0 0 16 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.125 13.375V16.1875C11.125 16.7053 10.7053 17.125 10.1875 17.125H2.0625C1.54473 17.125 1.125 16.7053 1.125 16.1875V5.5625C1.125 5.04473 1.54473 4.625 2.0625 4.625H3.625C4.05089 4.625 4.46849 4.6605 4.875 4.7287M11.125 13.375H13.9375C14.4553 13.375 14.875 12.9553 14.875 12.4375V8.375C14.875 4.65876 12.1721 1.5738 8.625 0.978698C8.21849 0.910499 7.80089 0.875 7.375 0.875H5.8125C5.29473 0.875 4.875 1.29473 4.875 1.8125V4.7287M11.125 13.375H5.8125C5.29473 13.375 4.875 12.9553 4.875 12.4375V4.7287M14.875 10.25V8.6875C14.875 7.1342 13.6158 5.875 12.0625 5.875H10.8125C10.2947 5.875 9.875 5.45527 9.875 4.9375V3.6875C9.875 2.1342 8.6158 0.875 7.0625 0.875H6.125"
+            stroke="#344054"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <button
+        type="button"
+        (click)="delete.emit()"
+        class="hover:bg-gray-100 p-2 h-8 w-8 rounded-full flex justify-center items-center"
+      >
+        <svg
+          width="16"
+          height="18"
+          viewBox="0 0 16 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10.2837 6.5L9.99519 14M6.00481 14L5.71635 6.5M14.023 3.82547C14.308 3.86851 14.592 3.91456 14.875 3.96358M14.023 3.82547L13.1332 15.3938C13.058 16.3707 12.2434 17.125 11.2637 17.125H4.73631C3.75655 17.125 2.94198 16.3707 2.86683 15.3938L1.97696 3.82547M14.023 3.82547C13.0677 3.6812 12.1013 3.57071 11.125 3.49527M1.125 3.96358C1.40798 3.91456 1.69198 3.86851 1.97696 3.82547M1.97696 3.82547C2.93231 3.6812 3.89874 3.57071 4.875 3.49527M11.125 3.49527V2.73182C11.125 1.74902 10.3661 0.928526 9.38382 0.897103C8.92435 0.882405 8.46304 0.875 8 0.875C7.53696 0.875 7.07565 0.882405 6.61618 0.897103C5.63388 0.928526 4.875 1.74902 4.875 2.73182V3.49527M11.125 3.49527C10.0938 3.41558 9.05164 3.375 8 3.375C6.94836 3.375 5.9062 3.41558 4.875 3.49527"
+            stroke="#344054"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="hover:bg-gray-100 p-2 h-8 w-8 rounded-full flex justify-center items-center"
+      >
+        <svg
+          width="4"
+          height="14"
+          viewBox="0 0 4 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M0.75 2C0.75 1.30964 1.30964 0.75 2 0.75C2.69036 0.75 3.25 1.30964 3.25 2C3.25 2.69036 2.69036 3.25 2 3.25C1.30964 3.25 0.75 2.69036 0.75 2ZM0.75 7C0.75 6.30964 1.30964 5.75 2 5.75C2.69036 5.75 3.25 6.30964 3.25 7C3.25 7.69036 2.69036 8.25 2 8.25C1.30964 8.25 0.75 7.69036 0.75 7ZM0.75 12C0.75 11.3096 1.30964 10.75 2 10.75C2.69036 10.75 3.25 11.3096 3.25 12C3.25 12.6904 2.69036 13.25 2 13.25C1.30964 13.25 0.75 12.6904 0.75 12Z"
+            fill="#344054"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  @switch (question.type) { @case ('text') {
+  <div>
+    <textarea
+      name="question"
+      id="question"
+      placeholder="Write..."
+      [value]="question.text"
+      class="focus:border-b-2 hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+    ></textarea>
+  </div>
+
+  } @case ('multiple-choice') {
+  <ng-container>
+    <textarea
+      name="question"
+      id="question"
+      placeholder="Write..."
+      [value]="question.text"
+      class="focus:border-b-2 px-2 w-full hover:border-b-2 transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+    ></textarea>
+    <div>
+      @for(option of question.options; track $index){
+      <div class="flex items-center gap-2 space-y-4">
+        <div class="w-4 h-4 mt-4 rounded-full border border-gray-400"></div>
+        <input
+          type="text"
+          [value]="option.label"
+          [placeholder]="option.label"
+          class="focus:border-b-2 px-2 resize-none transition-all ease-in 1s hover:border-b-2 focus:border-b-[#175CD3] outline-none"
+        />
+        <button
+          (click)="deleteOption($index)"
+          class="hover:bg-gray-100 p-2 rounded-full"
+        >
+          <svg
+            width="14"
+            height="16"
+            viewBox="0 0 16 18"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.96725 6.5L9.67879 14M5.6884 14L5.39994 6.5M13.7066 3.82547C13.9916 3.86851 14.2756 3.91456 14.5586 3.96358M13.7066 3.82547L12.8168 15.3938C12.7416 16.3707 11.927 17.125 10.9473 17.125H4.4199C3.44015 17.125 2.62557 16.3707 2.55042 15.3938L1.66055 3.82547M13.7066 3.82547C12.7513 3.6812 11.7848 3.57071 10.8086 3.49527M0.808594 3.96358C1.09157 3.91456 1.37557 3.86851 1.66055 3.82547M1.66055 3.82547C2.61591 3.6812 3.58234 3.57071 4.55859 3.49527M10.8086 3.49527V2.73182C10.8086 1.74902 10.0497 0.928526 9.06741 0.897103C8.60794 0.882405 8.14663 0.875 7.68359 0.875C7.22055 0.875 6.75924 0.882405 6.29977 0.897103C5.31747 0.928526 4.55859 1.74902 4.55859 2.73182V3.49527M10.8086 3.49527C9.77739 3.41558 8.73523 3.375 7.68359 3.375C6.63195 3.375 5.58979 3.41558 4.55859 3.49527"
+              stroke="#404653"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      }
+      <button
+        (click)="addOption()"
+        class="text-[#175CD3] text-xs ml-6 mt-4 hover:bg-[#D1E9FF] px-2 py-1 rounded-sm transition-all ease-in 1s"
+      >
+        Add Option
+      </button>
+    </div>
+  </ng-container>
+  } }
+</div>
