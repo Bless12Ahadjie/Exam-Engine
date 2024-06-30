@@ -4,9 +4,9 @@ export interface Options {
 }
 
 export interface Question {
-  type: string;
+  type: 'multiple-choice' | 'text' | 'boolean' | 'checkboxes';
   text: string;
   label: string;
   options?: Options[];
-  correctAnswers?: string[] | number[];
+  correctAnswers: string[] | number[];
 }
