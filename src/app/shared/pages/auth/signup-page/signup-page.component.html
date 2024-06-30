@@ -1,136 +1,201 @@
-
 <div class="flex justify-between items-center w-[100%] h-full">
-
   <div class="flex flex-col items-center p-[24px] w-[50%]">
     <div class="w-[414px] h-[Hug(544px)">
-      <div class="flex flex-col gap-[24px] items-center mb-[3%] ">
+      <div class="flex flex-col gap-[24px] items-center mb-[3%]">
         <div class="flex flex-col gap-[24px]">
           <div>
-            <p class="text-[32px] text-[#101828] font-semibold paragraph">Sign up for your Account</p>
-            <p class="text-[#000000] text-[14px] font-light">Hello there! Kindly fill in all fields appropriately </p>
+            <p class="text-[32px] text-[#101828] font-semibold paragraph">
+              Sign up for your Account
+            </p>
+            <p class="text-[#000000] text-[14px] font-light">
+              Hello there! Kindly fill in all fields appropriately
+            </p>
           </div>
-
         </div>
-
       </div>
 
-
       <div class="">
-        <form [formGroup]="form" class="flex flex-col pl-[18px] gap-[24px]" action="">
-
+        <form [formGroup]="form" class="flex flex-col pl-[18px] gap-[24px]">
           <div class="flex flex-col justify-center items-start">
-            <label >Name *</label>
-            <input  formControlName="username" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="name">
+            <label for="username">Name *</label>
+            <input
+              formControlName="username"
+              class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
+              type="email"
+              name=""
+              id="name"
+              placeholder="Enter your name"
+            />
             @if (username.invalid && username.errors && (username.touched ||
-              username.dirty)) {
-              <span>
-          @if(username.hasError('required')) {
-            <small class="text-sm text-red-500">
-            Username field cannot be empty.
-          </small>
-          } @if(username.hasError('minLength')) {
-                <small class="text-sm text-red-500">
-            Username must be at least 3 characters long.
-          </small>
+            username.dirty)) {
+            <span>
+              @if(username.hasError('required')) {
+              <small class="text-sm text-red-500">
+                Username field cannot be empty.
+              </small>
+              } @if(username.hasError('minLength')) {
+              <small class="text-sm text-red-500">
+                Username must be at least 3 characters long.
+              </small>
               } @if(username.hasError('invalidUsernameFormat')) {
-                <small class="text-sm text-red-500"> Username is invalid. </small>
+              <small class="text-sm text-red-500"> Username is invalid. </small>
               }
-        </span>
+            </span>
             }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="email">Email *</label>
-            <input  formControlName="email" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="email" name="" id="email">
+            <input
+              formControlName="email"
+              class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
+              type="email"
+              name=""
+              id="email"
+              placeholder="Enter your email"
+            />
+            @if (email.invalid && email.errors && (email.touched ||
+            email.dirty)) {
+            <span>
+              @if(email.hasError('required')) {
+              <small class="text-sm text-red-500">
+                Email field cannot be empty.
+              </small>
+              } @if(email.hasError('email')) {
+              <small class="text-sm text-red-500"> Email is not valid. </small>
+              }
+            </span>
+            }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="email">Gender *</label>
-            <input  formControlName="gender" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="text" name="" id="gender">
+            <select
+              name="gender"
+              id="gender"
+              formControlName="gender"
+              class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px] pr-[40px]"
+            >
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
             @if (gender.invalid && gender.errors && (gender.touched ||
-              gender.dirty)) {
-              <span>
-          @if(gender.hasError('required')) {
-            <small class="text-sm text-red-500">
-            gender field cannot be empty.
-          </small>
-          } @if(gender.hasError('minLength')) {
-                <small class="text-sm text-red-500">
-            gender must be at least 3 characters long.
-          </small>
-              } @if(gender.hasError('invalidUsernameFormat')) {
-                <small class="text-sm text-red-500"> gender is invalid. </small>
-              }
-                @if (gender.value?.toLowerCase()!== "male" ||"female"){
-                  <small class="text-sm text-red-500">
-            Gender must be either "Male" or "Female"
-          </small>
-                }
-        </span>
+            gender.dirty)) {
+            <span>
+              @if(gender.hasError('required')) {
+              <small class="text-sm text-red-500">
+                Gender field cannot be empty.
+              </small>
+              } 
+            </span>
             }
           </div>
 
           <div class="flex flex-col justify-center items-start">
             <label for="password">Password *</label>
-            <input  formControlName="password" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="password">
+            <input
+              formControlName="password"
+              class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
+              type="password"
+              name=""
+              id="password"
+              placeholder="Enter your password"
+            />
             @if (password.errors && (password.touched || password.dirty)) {
-              <span>
-          @if(password.hasError('required')) {
-            <small class="text-sm text-red-500">
-            Password field cannot be empty.
-          </small>
-          } @if(password.hasError('minLength')) {
-                <small class="text-sm text-red-500">
-            Password length must be at least 8 characters long.
-          </small>
+            <span>
+              @if(password.hasError('required')) {
+              <small class="text-sm text-red-500">
+                Password field cannot be empty.
+              </small>
+              } @if(password.hasError('minLength')) {
+              <small class="text-sm text-red-500">
+                Password length must be at least 8 characters long.
+              </small>
               } @if(password.hasError('passwordStrength')) {
-                <small class="text-sm text-red-500">
-            Password must contain at least one uppercase letter, one lowercase
-            letter, one number, and one special character.
-          </small>
+              <small class="text-sm text-red-500">
+                Password must contain at least one uppercase letter, one
+                lowercase letter, one number, and one special character.
+              </small>
               }
-        </span>
+            </span>
             }
           </div>
 
           <div class="flex flex-col justify-center items-start">
-            <label for="password" >Confirm Password *</label>
-            <input  formControlName="confirmPassword" class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md  pl-[20px]" type="password" name="" id="confirmPassword">
+            <label for="password">Confirm Password *</label>
+            <input
+              formControlName="confirmPassword"
+              class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
+              type="password"
+              name=""
+              id="confirmPassword"
+              placeholder="Enter your password"
+            />
             @if (confirmPassword.errors && (confirmPassword.touched ||
-              confirmPassword.dirty)) {
-              <span>
-          @if(confirmPassword.hasError('required')) {
-            <small class="text-sm text-red-500">
-            Confirm Password field cannot be empty.
-          </small>
-          } @if(confirmPassword.hasError('confirmPasswordMismatch')) {
-                <small class="text-sm text-red-500">
-            Passwords does not match.
-          </small>
+            confirmPassword.dirty)) {
+            <span>
+              @if(confirmPassword.hasError('required')) {
+              <small class="text-sm text-red-500">
+                Confirm Password field cannot be empty.
+              </small>
+              } @if(confirmPassword.hasError('confirmPasswordMismatch')) {
+              <small class="text-sm text-red-500">
+                Passwords does not match.
+              </small>
               }
-        </span>
+            </span>
             }
           </div>
 
-          <div >
-            <button (click)="register()" class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white" >Sign up</button>
-
+          <div>
+            <button
+              type="submit"
+              [disabled]="isLoading"
+              (click)="register()"
+              class="bg-[#283ADD] w-[365px] h-[40px] rounded-md text-white flex justify-center items-center gap-2"
+            >
+              @if (isLoading) {
+              <span class="animate-spin flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-loader-circle"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+              </span>
+              <span class="text-sm">Signing up...</span>
+              } @else { Sign Up }
+            </button>
           </div>
 
           <div class="flex flex-col items-center">
-            <p>Already have an account? <span class="text-[#283ADD] cursor-pointer" [routerLink]="['/login']" >Sign in</span></p>
+            <p>
+              Already have an account?
+              <span
+                class="text-[#283ADD] cursor-pointer"
+                [routerLink]="['/login']"
+                >Sign in</span
+              >
+            </p>
           </div>
-
         </form>
       </div>
-
-
     </div>
-
   </div>
 
   <div class="flex justify-center items-center w-[50%] h-screen px-10">
-    <img class="h-[453.99px] w-[462px]" src="../../../../../assets/amico.svg" alt="">
+    <img
+      class="h-[453.99px] w-[462px]"
+      src="../../../../../assets/amico.svg"
+      alt=""
+    />
   </div>
-
 </div>
