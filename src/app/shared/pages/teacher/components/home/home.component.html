@@ -31,7 +31,7 @@
   </div>
   @if(toggledCreateQuestion()){
   <div class="w-[60%] mx-auto">
-    <app-form (questionsEmitter)="handleQuestionsData($event)" />
+    <app-form (outputQuestions)="handleQuestions($event)"/>
   </div>
 
   } @else {

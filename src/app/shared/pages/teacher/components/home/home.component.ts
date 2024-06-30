@@ -10,23 +10,18 @@ import { Question } from '../../interfaces/question.interface';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  @ViewChild(FormComponent) formComponent!: FormComponent;
-  toggledCreateQuestion = signal<boolean>(true);
-  questions = signal<Question[]>([]);
+  toggledCreateQuestion = signal<boolean>(false);
+  currentQuestions = signal<Question[]>([]);
 
   toggleCreateQuestion() {
     this.toggledCreateQuestion.update((prev) => !prev);
   }
 
-  handleQuestionsData(questions: Question[]) {
-    this.questions.set(questions);
-    console.log('Received questions data:', this.questions());
+  handleQuestions(questions: Question[]) {
+    this.currentQuestions.set(questions);
   }
 
   sendQuestions() {
-    if (this.formComponent) {
-      this.questions.set(this.formComponent.questions);
-      console.log('Sending questions data:', this.questions());
-    }
+    console.log('Sending questions:', this.currentQuestions());
   }
 }
