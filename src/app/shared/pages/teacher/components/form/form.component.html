@@ -97,11 +97,11 @@
         <option value="checkboxes" class="hover:bg-[#D1E9FF]">
           Checkboxes
         </option>
-        <option value="text" class="hover:bg-[#D1E9FF]">Text</option>
+        <option value="short-answer" class="hover:bg-[#D1E9FF]">Short Answer</option>
         <option value="boolean">True/False</option>
       </select>
     </div>
-    } @switch (question.type) { @case ('text') {
+    } @switch (question.type) { @case ('short-answer') {
     <ng-container>
       <textarea
         id="question"

@@ -81,7 +81,7 @@ export class FormComponent implements OnInit {
   changeQuestionType(index: number, newType: Event) {
     const value = (newType.target as HTMLSelectElement).value as
       | 'multiple-choice'
-      | 'text'
+      | 'short-answer'
       | 'boolean'
       | 'checkboxes';
     this.questions[index].type = value;

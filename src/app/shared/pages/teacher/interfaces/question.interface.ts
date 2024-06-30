@@ -4,7 +4,7 @@ export interface Options {
 }
 
 export interface Question {
-  type: 'multiple-choice' | 'text' | 'boolean' | 'checkboxes';
+  type: 'multiple-choice' | 'short-answer' | 'boolean' | 'checkboxes';
   text: string;
   label: string;
   options?: Options[];
