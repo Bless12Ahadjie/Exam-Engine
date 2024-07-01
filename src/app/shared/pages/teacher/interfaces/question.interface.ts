@@ -4,9 +4,18 @@ export interface Options {
 }
 
 export interface Question {
-  type: 'multiple-choice' | 'text' | 'boolean' | 'checkboxes';
+  type: 'multiple-choice' | 'short-answer' | 'boolean' | 'checkboxes';
   text: string;
   label: string;
   options?: Options[];
   correctAnswers: string[] | number[];
+}
+
+export interface ExamQuestion {
+  questionTitle: string;
+  questionInstruction: string;
+  questionStartTime: string;
+  questionEndTime: string;
+  questions: Question[];
+  questionReceivers: string[];
 }
