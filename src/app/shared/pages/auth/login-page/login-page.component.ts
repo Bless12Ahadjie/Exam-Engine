@@ -9,7 +9,7 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { ToasterService } from '../../../components/toaster/services/toaster.service';
-import { Payload } from '../../../../../Interfaces/interfaces';
+import { LoginPayload } from '../../../../../Interfaces/interfaces';
 
 @Component({
   selector: 'app-login-page',
@@ -30,19 +30,19 @@ export class LoginPageComponent {
 
   constructor() {
     this.form = this._formBuilder.group({
-      username: [
+      email: [
         '',
         {
-          validators: [Validators.required],
+          validators: [Validators.required, Validators.email],
           updateOn: 'blur',
         },
       ],
-      password: ['', [Validators.required]],
+      password: ['', Validators.required],
     });
   }
 
-  get username() {
-    return this.form.controls['username'];
+  get email() {
+    return this.form.controls['email'];
   }
 
   get password() {
@@ -61,14 +61,6 @@ export class LoginPageComponent {
         },
         error: (error) => {
           this.errorHandler(error);
-          if (error.status === 403) {
-            console.error('Forbidden: Check your credentials or permissions.');
-            this._toaster.showToast({
-              message: 'Forbidden: Check your credentials or permissions.',
-              type: 'error',
-              duration: 3000,
-            });
-          }
         },
       });
     } else {
@@ -86,7 +78,7 @@ export class LoginPageComponent {
     return this.form.valid;
   }
 
-  responseHandler(response: Payload) {
+  responseHandler(response: LoginPayload) {
     this.isLoading = false;
 
     if (response.status === 200) {
@@ -95,7 +87,7 @@ export class LoginPageComponent {
         type: 'success',
         duration: 3000,
       });
-      this._router.navigate(['/login']);
+      this.routeToDashboard(response.roles);
     } else {
       this._toaster.showToast({
         message: response.message,
@@ -112,5 +104,19 @@ export class LoginPageComponent {
       type: 'error',
       duration: 3000,
     });
+  }
+
+  private routeToDashboard(role: string) {
+    switch (role) {
+      case 'TEACHER':
+        this._router.navigate(['/teacher']);
+        break;
+      case 'STUDENT':
+        this._router.navigate(['/student']);
+        break;
+      default:
+        this._router.navigate(['/']);
+        break;
+    }
   }
 }

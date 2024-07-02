@@ -40,22 +40,21 @@
           <div class="flex flex-col justify-center items-start">
             <label for="email">Email *</label>
             <input
-              formControlName="username"
+              formControlName="email"
               class="w-[365px] h-[40px] border border-[#D8DAE5] rounded-md pl-[20px]"
               type="email"
               name=""
               id="email"
-              required="true"
             />
-            @if (username.invalid && username.errors && (username.touched ||
-            username.dirty)) {
+            @if (email.invalid && email.errors && (email.touched ||
+            email.dirty)) {
             <span>
-              @if(username.hasError('required')) {
+              @if(email.hasError('required')) {
               <small class="text-sm text-red-500">
-                Username is required.
+                Email is required.
               </small>
-              } @if(username.hasError('invalidUsernameFormat')) {
-              <small class="text-sm text-red-500"> Username is invalid. </small>
+              } @if(email.hasError('email')) {
+              <small class="text-sm text-red-500"> Email is invalid. </small>
               }
             </span>
             }
