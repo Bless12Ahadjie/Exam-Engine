@@ -10,6 +10,10 @@ import { Component, input } from '@angular/core';
 export class BrandComponent {
   size = input<string>('');
 
+  constructor() {
+    this.textClasses();
+  }
+
   textClasses(): string {
     return `bg-gradient-to-r from-[#D428E1F5] to-[#39558E] bg-clip-text text-transparent text-[${this.size()}] font-bold`;
   }

@@ -1,8 +1,11 @@
-import { Component, OnInit, output } from '@angular/core';
 import {
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+  Component,
+  ElementRef,
+  HostListener,
+  OnInit,
+  output,
+} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionComponent } from '../question/question.component';
 import { Question } from '../../interfaces/question.interface';
 
@@ -16,6 +19,10 @@ import { Question } from '../../interfaces/question.interface';
 export class FormComponent implements OnInit {
   outputQuestions = output<Question[]>();
   questions: Question[] = [];
+  showTypePanelFor: number | null = null;
+  private dragSrcIndex: number | null = null;
+
+  private elementRef!: ElementRef;
 
   ngOnInit() {
     this.initializeQuestion();
@@ -34,7 +41,7 @@ export class FormComponent implements OnInit {
       correctAnswers: [],
     };
     this.questions.push(newQuestion);
-    this.emitQuestions(); 
+    this.emitQuestions();
   }
 
   addQuestion() {
@@ -46,7 +53,7 @@ export class FormComponent implements OnInit {
       correctAnswers: [],
     };
     this.questions.push(newQuestion);
-    this.emitQuestions(); 
+    this.emitQuestions();
   }
 
   deleteQuestion(index: number) {
@@ -60,25 +67,92 @@ export class FormComponent implements OnInit {
       label: question.label + ' (Copy)',
     };
     this.questions.push(duplicatedQuestion);
-    this.emitQuestions(); 
+    this.emitQuestions();
+  }
+
+  toggleTypePanel(index: number) {
+    if (this.showTypePanelFor === index) {
+      this.showTypePanelFor = null;
+    } else {
+      this.showTypePanelFor = index;
+    }
+  }
+
+  changeQuestionType(index: number, newType: Event) {
+    const value = (newType.target as HTMLSelectElement).value as
+      | 'multiple-choice'
+      | 'short-answer'
+      | 'boolean'
+      | 'checkboxes';
+    this.questions[index].type = value;
+    this.emitQuestions();
+    this.showTypePanelFor = null;
   }
 
   addOption(question: Question) {
     if (!question.options) {
       question.options = [];
     }
-    question.options.push({ label: `Option ${question.options.length + 1}`, value: '' });
-    this.emitQuestions(); 
+    question.options.push({
+      label: `Option ${question.options.length + 1}`,
+      value: '',
+    });
+    this.emitQuestions();
   }
 
   deleteOption(question: Question, index: number) {
     if (question.options) {
       question.options.splice(index, 1);
     }
-    this.emitQuestions(); 
+    this.emitQuestions();
   }
 
-  getAllValues() {
-    console.log(this.questions);
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+    if (
+      this.showTypePanelFor !== null &&
+      !this.elementRef.nativeElement.contains(targetElement)
+    ) {
+      this.showTypePanelFor = null;
+    }
+  }
+
+  onDragStart(event: DragEvent, index: number): void {
+    this.dragSrcIndex = index;
+    if (event.dataTransfer) {
+      event.dataTransfer.setData('text/plain', index.toString());
+      event.dataTransfer.effectAllowed = 'move';
+    }
+  }
+
+  onDragOver(event: DragEvent): void {
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+    event.dataTransfer!.dropEffect = 'move';
+  }
+
+  onDrop(event: DragEvent, index: number): void {
+    if (event.stopPropagation) {
+      event.stopPropagation();
+    }
+
+    const dragSrcIndex = this.dragSrcIndex;
+    if (dragSrcIndex !== null && dragSrcIndex !== index) {
+      /**
+       * Swap the elements in the questions array
+       */
+
+      [this.questions[dragSrcIndex], this.questions[index]] = [
+        this.questions[index],
+        this.questions[dragSrcIndex],
+      ];
+    }
+    this.dragSrcIndex = null;
+  }
+
+  onDragEnd(): void {
+    this.dragSrcIndex = null;
   }
 }
