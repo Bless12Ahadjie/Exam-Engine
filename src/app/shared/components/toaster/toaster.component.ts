@@ -18,10 +18,7 @@ export class ToasterComponent implements OnInit {
 	private _toaster = inject(ToasterService);
 
 	ngOnInit() {
-		this._toaster.toasts$.subscribe((toasts) => this.toasts.set(toasts));
-
-    console.log("Toaster component: ", this.toasts);
-    
+		this._toaster.toasts$.subscribe((toasts) => this.toasts.set(toasts));    
 	}
 
 	public removeToast(toast: IToast) {

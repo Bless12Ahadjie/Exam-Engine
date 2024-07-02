@@ -23,8 +23,6 @@ export class ToasterService {
     if (toast.duration) {
       setTimeout(() => this.removeToast(toast), toast.duration);
     }
-
-    this.toasts$.subscribe((toast) => console.log(toast));
   }
 
   /**
