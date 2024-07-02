@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   loginUser(credentials: {
-    username: string;
+    email: string;
     password: string;
   }): Observable<LoginPayload> {
     return this._http.post<LoginPayload>(
