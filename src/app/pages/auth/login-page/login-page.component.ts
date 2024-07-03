@@ -7,10 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
-import { AuthService } from '../../../../services/auth/auth.service';
-import { ToasterService } from '../../../components/toaster/services/toaster.service';
-import { LoginPayload } from '../../../../../Interfaces/interfaces';
-import { TokenService } from '../../../../services/token/token.service';
+import { TokenService } from '../../../services/token/token.service';
+import { AuthService } from '../../../services/auth/auth.service';
+import { ToasterService } from '../../../shared/components/toaster/services/toaster.service';
+import { LoginPayload } from '../../../../Interfaces/interfaces';
 
 @Component({
   selector: 'app-login-page',

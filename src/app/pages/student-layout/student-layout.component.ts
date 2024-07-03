@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from '../../components/navbar/navbar.component';
-import {StudentDashboardComponent} from "../../components/student-dashboard/student-dashboard.component";
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from '../teacher/components/navbar/navbar.component';
+import { StudentDashboardComponent } from '../../shared/components/student-dashboard/student-dashboard.component';
 
 @Component({
   selector: 'app-student-layout',

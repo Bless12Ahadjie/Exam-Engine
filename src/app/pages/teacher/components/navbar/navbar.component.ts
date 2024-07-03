@@ -1,5 +1,5 @@
 import { Component, output } from '@angular/core';
-import { BrandComponent } from '../../../../components/brand/brand.component';
+import { BrandComponent } from '../../../../shared/components/brand/brand.component';
 
 @Component({
   selector: 'app-navbar',

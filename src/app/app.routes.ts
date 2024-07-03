@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { StudentLayoutComponent } from './shared/pages/student-layout/student-layout.component';
 import { ConfirmationPage1Component } from './shared/components/confirmation-page-1/confirmation-page-1.component';
 import { StudentDashboardComponent } from './shared/components/student-dashboard/student-dashboard.component';
-import { AuthComponent } from './shared/pages/auth/auth.component';
 import { ConfirmationPage2Component } from './shared/components/confirmation-page-2/confirmation-page-2.component';
 import { ExamPageComponent } from './shared/components/exam-page/exam-page.component';
-import { TeacherComponent } from './shared/pages/teacher/teacher.component';
+import { AuthComponent } from './pages/auth/auth.component';
+import { StudentLayoutComponent } from './pages/student-layout/student-layout.component';
+import { TeacherComponent } from './pages/teacher/teacher.component';
 
 export const routes: Routes = [
   {
@@ -17,9 +17,7 @@ export const routes: Routes = [
     path: '',
     component: AuthComponent,
     loadChildren: () =>
-      import('../app/shared/pages/auth/auth.routes').then(
-        (auth) => auth.routes
-      ),
+      import('../app/pages/auth/auth.routes').then((auth) => auth.routes),
   },
 
   {
@@ -48,7 +46,7 @@ export const routes: Routes = [
     path: 'teacher',
     component: TeacherComponent,
     loadChildren: () =>
-      import('../app/shared/pages/teacher/teacher.routes').then(
+      import('../app/pages/teacher/teacher.routes').then(
         (teacher) => teacher.routes
       ),
   },
