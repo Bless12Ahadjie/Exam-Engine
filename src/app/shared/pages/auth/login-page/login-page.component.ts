@@ -10,6 +10,7 @@ import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { ToasterService } from '../../../components/toaster/services/toaster.service';
 import { LoginPayload } from '../../../../../Interfaces/interfaces';
+import { TokenService } from '../../../../services/token/token.service';
 
 @Component({
   selector: 'app-login-page',
@@ -21,10 +22,11 @@ import { LoginPayload } from '../../../../../Interfaces/interfaces';
 export class LoginPageComponent {
   isLoading: boolean = false;
 
-  _formBuilder = inject(FormBuilder);
-  _authService = inject(AuthService);
-  _toaster = inject(ToasterService);
-  _router = inject(Router);
+  private _formBuilder = inject(FormBuilder);
+  private _authService = inject(AuthService);
+  private _tokenService = inject(TokenService);
+  private _toaster = inject(ToasterService);
+  private _router = inject(Router);
 
   form: FormGroup;
 
@@ -65,11 +67,8 @@ export class LoginPageComponent {
       });
     } else {
       this.isLoading = false;
-      this._toaster.showToast({
-        message: 'Form is invalid. Please check the errors.',
-        type: 'error',
-        duration: 3000,
-      });
+      this.showToast('Form is invalid. Please check the errors.', 'error');
+
       this.form.markAllAsTouched();
     }
   }
@@ -82,41 +81,30 @@ export class LoginPageComponent {
     this.isLoading = false;
 
     if (response.status === 200) {
-      this._toaster.showToast({
-        message: response.message,
-        type: 'success',
-        duration: 3000,
-      });
+      this._tokenService.saveToken(response.token);
+
+      this.showToast(response.message, 'success');
+
       this.routeToDashboard(response.roles);
     } else {
-      this._toaster.showToast({
-        message: response.message,
-        type: 'error',
-        duration: 3000,
-      });
+      this.showToast(response.message, 'error');
     }
   }
 
   errorHandler(error: Error) {
     this.isLoading = false;
+    this.showToast(error.message, 'error');
+  }
+
+  private showToast(message: string, type: 'error' | 'success') {
     this._toaster.showToast({
-      message: error.message,
-      type: 'error',
+      message,
+      type,
       duration: 3000,
     });
   }
 
   private routeToDashboard(role: string) {
-    switch (role) {
-      case 'TEACHER':
-        this._router.navigate(['/teacher']);
-        break;
-      case 'STUDENT':
-        this._router.navigate(['/student']);
-        break;
-      default:
-        this._router.navigate(['/']);
-        break;
-    }
+    this._router.navigate([`/${role.toLowerCase()}`]);
   }
 }

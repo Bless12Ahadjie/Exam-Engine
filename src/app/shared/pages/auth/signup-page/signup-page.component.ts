@@ -42,7 +42,11 @@ export class SignupPageComponent {
       email: [
         '',
         {
-          validators: [Validators.required, Validators.minLength(3), Validators.email],
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.email,
+          ],
           updateOn: 'blur',
         },
       ],
@@ -73,13 +77,13 @@ export class SignupPageComponent {
   }
 
   register() {
-    if(this.formIsValid()){
+    if (this.formIsValid()) {
       if (
         this.form.controls['password'].value ===
         this.form.controls['confirmPassword'].value
       ) {
         this.isLoading = true;
-  
+
         this._authService.registerUser(this.form.value).subscribe({
           next: (res: Payload) => {
             this.responseHandler(res);
@@ -89,19 +93,11 @@ export class SignupPageComponent {
           },
         });
       } else {
-        this._toaster.showToast({
-          message: 'Passwords do not match',
-          type: 'error',
-          duration: 3000,
-        });
+        this.showToast('Passwords do not match', 'error');
       }
     } else {
       this.isLoading = false;
-      this._toaster.showToast({
-        message: 'Form is invalid. Please check the errors.',
-        type: 'error',
-        duration: 3000,
-      });
+      this.showToast('Form is invalid. Please check the errors.', 'error');
       this.form.markAllAsTouched();
     }
   }
@@ -114,26 +110,23 @@ export class SignupPageComponent {
     this.isLoading = false;
 
     if (response.status === 201) {
-      this._toaster.showToast({
-        message: response.message,
-        type: 'success',
-        duration: 3000,
-      });
+      this.showToast(response.message, 'success');
+
       this._router.navigate(['/login']);
     } else {
-      this._toaster.showToast({
-        message: response.message,
-        type: 'error',
-        duration: 3000,
-      });
+      this.showToast(response.message, 'error');
     }
   }
 
   errorHandler(response: Error) {
     this.isLoading = false;
+    this.showToast(response.message, 'error');
+  }
+
+  private showToast(message: string, type: 'error' | 'success') {
     this._toaster.showToast({
-      message: response.message,
-      type: 'error',
+      message,
+      type,
       duration: 3000,
     });
   }
