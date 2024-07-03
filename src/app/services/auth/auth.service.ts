@@ -3,12 +3,14 @@ import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
 import { LoginPayload, Payload } from '../../../Interfaces/interfaces';
 import { Observable } from 'rxjs';
+import { TokenService } from '../token/token.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  _http = inject(HttpClient);
+  private _http = inject(HttpClient);
+  private _tokenService = inject(TokenService);
 
   registerUser(formData: object): Observable<Payload> {
     return this._http.post<Payload>(
@@ -25,5 +27,13 @@ export class AuthService {
       `${environment.BACKEND_API_BASE_URL}/exam-engine/api/v1/auth/login`,
       credentials
     );
+  }
+
+  isLoggedIn() {
+    return this._tokenService.getToken();
+  }
+
+  logout() {
+    this._tokenService.removeToken();
   }
 }

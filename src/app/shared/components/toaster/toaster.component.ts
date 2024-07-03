@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { ToasterService } from './services/toaster.service';
 import { IToast } from './services/toast.interface';
-import { truncateString } from '../../pages/auth/signup-page/string.helper';
+import { truncateString } from '../../helpers/string.helper';
 
 @Component({
   selector: 'app-toaster',
