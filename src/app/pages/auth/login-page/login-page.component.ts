@@ -11,6 +11,7 @@ import { TokenService } from '../../../services/token/token.service';
 import { AuthService } from '../../../services/auth/auth.service';
 import { ToasterService } from '../../../shared/components/toaster/services/toaster.service';
 import { LoginPayload } from '../../../../Interfaces/interfaces';
+import { UserStore } from '../../../store/user/user.store';
 
 @Component({
   selector: 'app-login-page',
@@ -21,6 +22,8 @@ import { LoginPayload } from '../../../../Interfaces/interfaces';
 })
 export class LoginPageComponent {
   isLoading: boolean = false;
+
+  private readonly userStore = inject(UserStore);
 
   private _formBuilder = inject(FormBuilder);
   private _authService = inject(AuthService);
@@ -82,6 +85,7 @@ export class LoginPageComponent {
 
     if (response.status === 200) {
       this._tokenService.saveToken(response.token);
+      this.setUserDetails(response);
 
       this.showToast(response.message, 'success');
 
@@ -105,6 +109,21 @@ export class LoginPageComponent {
   }
 
   private routeToDashboard(role: string) {
-    this._router.navigate([`/${role.toLowerCase()}`]);
+    switch (role) {
+      case 'STUDENT':
+        this._router.navigate(['/student/dashboard']);
+        break;
+      case 'TEACHER':
+        this._router.navigate(['/teacher']);
+        break;
+      default:
+        break;
+    }
+  }
+
+  private setUserDetails(details: LoginPayload) {
+    this.userStore.setUserId(details.userId);
+    this.userStore.setUserRole(details.roles);
+    this.userStore.setUserEmail(details.username);
   }
 }
