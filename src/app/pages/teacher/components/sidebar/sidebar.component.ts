@@ -6,10 +6,10 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { BrandComponent } from '../../../../components/brand/brand.component';
 import { INavLinks } from './sidebar.interface';
 import { Subscription, filter } from 'rxjs';
 import { Event, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { BrandComponent } from '../../../../shared/components/brand/brand.component';
 
 @Component({
   selector: 'app-sidebar',
