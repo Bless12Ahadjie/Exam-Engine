@@ -10,6 +10,7 @@ import { INavLinks } from './sidebar.interface';
 import { Subscription, filter } from 'rxjs';
 import { Event, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { BrandComponent } from '../../../../shared/components/brand/brand.component';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,6 +29,7 @@ export class SidebarComponent {
 
   private _router = inject(Router);
   private _routerSubscription!: Subscription;
+  private _authService = inject(AuthService);
 
   constructor() {
     this._routerSubscription = this._router.events
@@ -60,4 +62,8 @@ export class SidebarComponent {
   ngOnDestroy(): void {
 		this._routerSubscription.unsubscribe();
 	}
+
+  handleLogout(): void {
+    this._authService.logout();
+  }
 }
