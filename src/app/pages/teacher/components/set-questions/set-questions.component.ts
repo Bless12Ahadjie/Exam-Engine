@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormComponent } from '../form/form.component';
-import { ExamQuestion, Question } from '../../interfaces/question.interface';
+import { ExamQuestion, ExamSettings, Question } from '../../interfaces/question.interface';
 import { QuestionsService } from '../../services/questions/questions.service';
 import { ToasterService } from '../../../../shared/components/toaster/services/toaster.service';
 import { IResponse } from '../../../../interfaces/response.interface';
@@ -20,8 +20,39 @@ export class SetQuestionsComponent {
   currentQuestions = signal<Question[]>([]);
   currentView: 'questions' | 'settings' = 'questions';
 
+  settingsData!: ExamSettings;
+
   private _questionsService = inject(QuestionsService);
   private _toaster = inject(ToasterService);
+
+  ngOnInit() {
+    this.loadFromStorage();
+  }
+
+  emitQuestions() {
+    this.saveToStorage();
+  }
+
+  saveToStorage() {
+    if (this.settingsData) {
+      sessionStorage.setItem(
+        'exam_engine_settings',
+        JSON.stringify(this.settingsData)
+      );
+    }
+  }
+
+  loadFromStorage() {
+    const savedSettings = sessionStorage.getItem('exam_engine_settings');
+    if (savedSettings) {
+      this.settingsData = JSON.parse(savedSettings);
+    }
+  }
+
+  handleSettingsChange(settings: ExamSettings) {
+    this.settingsData = settings;
+    this.saveToStorage();
+  }
 
   handleQuestions(questions: Question[]) {
     this.currentQuestions.set(questions);

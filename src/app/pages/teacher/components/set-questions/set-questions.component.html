@@ -13,7 +13,7 @@
         Question
       </button>
       <button
-        class="font-WorkSans  text-sm mt-4 px-2 py-1 rounded-md transition-all ease-in 1s"
+        class="font-WorkSans text-sm mt-4 px-2 py-1 rounded-md transition-all ease-in 1s"
         (click)="showSettings()"
         [class]="{
           active: currentView === 'settings',
@@ -45,7 +45,7 @@
 
     } @if(currentView === 'settings'){
 
-    <app-questions-settings />
+    <app-questions-settings (settingsChanged)="handleSettingsChange($event)" />
     }
   </main>
 </section>
