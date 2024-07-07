@@ -29,8 +29,6 @@ export class HomeComponent {
   }
 
   sendQuestions() {
-    console.log('Sending questions:', this.currentQuestions());
-
     const data: ExamQuestion = {
       questionTitle: 'Software Testing',
       questionInstruction: 'Mid-semester question',
