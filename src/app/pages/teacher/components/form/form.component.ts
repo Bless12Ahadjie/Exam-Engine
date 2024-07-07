@@ -107,6 +107,26 @@ export class FormComponent implements OnInit {
     this.emitQuestions();
   }
 
+  addCorrectAnswer(question: Question, answer: string) {
+    if (question.type === 'checkboxes') {
+      if (!question.correctAnswers.includes(answer)) {
+        question.correctAnswers.push(answer);
+      }
+      this.emitQuestions();
+    } else {
+      question.correctAnswers = [answer];
+      this.emitQuestions();
+    }
+  }
+
+  setCorrectAnswer(question: Question, event: Event) {
+    const answer = (event.target as HTMLInputElement).value;
+    if (question.type === 'short-answer' || question.type === 'boolean') {
+      question.correctAnswers = [answer];
+    }
+    this.emitQuestions();
+  }
+
   @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
     const targetElement = event.target as HTMLElement;
