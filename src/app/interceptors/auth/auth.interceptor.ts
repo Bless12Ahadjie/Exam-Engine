@@ -1,7 +1,5 @@
 import {
-  HttpEvent,
   HttpInterceptorFn,
-  HttpResponse,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TokenService } from '../../services/token/token.service';
@@ -13,11 +11,9 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const tokenService = inject(TokenService);
   const accessToken: string | null = tokenService.getToken();
 
-  if (accessToken && !req.url.includes('/auth')) {
-    console.log('AccessToken: ', accessToken);
-
+  if (accessToken && !req.url.includes('/login')) {
+    
     const payloadData = decodeJwt(accessToken);
-    console.log('payloadData: ', payloadData);
 
     if (payloadData) {
       const isExpired = payloadData.exp
@@ -25,7 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         : false;
 
       if (isExpired) {
-        // authService.logoutUser();
+        authService.logout();
       }
     }
 
