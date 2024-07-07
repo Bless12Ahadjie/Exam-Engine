@@ -1,15 +1,20 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   ACCESS_TOKEN_KEY,
+  decodeJwt,
   persistedGet,
   persistedRemove,
   persistedSave,
 } from '../../shared/helpers/constants.utile';
+import { PayLoadData } from '../../interfaces/token.interface';
+import { UserStore } from '../../store/user/user.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
+  readonly userStore = inject(UserStore);
+
   constructor() {}
 
   public saveToken(token: string): void {
@@ -17,7 +22,14 @@ export class TokenService {
   }
 
   public getToken(): string | null {
-    return persistedGet(ACCESS_TOKEN_KEY);
+    const token = persistedGet(ACCESS_TOKEN_KEY);
+    if (token) {
+      const decodedToken: PayLoadData | null = decodeJwt(token);
+      if (decodedToken) {
+        this.userStore.setUserId(decodedToken.jti);
+      }
+    }
+    return token;
   }
 
   public removeToken(): void {
