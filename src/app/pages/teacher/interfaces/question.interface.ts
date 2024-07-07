@@ -35,3 +35,12 @@ export interface BackendQuestions {
   }[];
   questionReceivers: string[];
 }
+
+
+export interface ExamSettings {
+  questionTitle: string;
+  questionInstruction: string;
+  questionStartTime: string;
+  questionEndTime: string;
+  questionReceivers: string;
+}
