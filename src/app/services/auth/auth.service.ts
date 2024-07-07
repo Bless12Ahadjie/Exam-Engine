@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LoginPayload, Payload } from '../../../Interfaces/interfaces';
 import { Observable } from 'rxjs';
 import { TokenService } from '../token/token.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { TokenService } from '../token/token.service';
 export class AuthService {
   private _http = inject(HttpClient);
   private _tokenService = inject(TokenService);
+  private _router = inject(Router);
 
   registerUser(formData: object): Observable<Payload> {
     return this._http.post<Payload>(
@@ -35,5 +37,6 @@ export class AuthService {
 
   logout() {
     this._tokenService.removeToken();
+    this._router.navigate(['/login']);
   }
 }

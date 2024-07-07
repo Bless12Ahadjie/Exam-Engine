@@ -97,7 +97,9 @@
         <option value="checkboxes" class="hover:bg-[#D1E9FF]">
           Checkboxes
         </option>
-        <option value="short-answer" class="hover:bg-[#D1E9FF]">Short Answer</option>
+        <option value="short-answer" class="hover:bg-[#D1E9FF]">
+          Short Answer
+        </option>
         <option value="boolean">True/False</option>
       </select>
     </div>
@@ -109,6 +111,14 @@
         [(ngModel)]="question.text"
         placeholder="Write..."
         class="focus:border-b-2 hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+      ></textarea>
+
+      <textarea
+        id="short-answer"
+        name="questionText"
+        placeholder="Type your answer here..."
+        (change)="setCorrectAnswer(question, $event)"
+        class="focus:border-b-2 mt-[3%] hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
       ></textarea>
     </ng-container>
 
@@ -123,7 +133,15 @@
       ></textarea>
       @for(option of question.options; track option; let optionIndex = $index){
       <div class="flex items-center gap-2 space-y-4">
-        <div class="w-4 h-4 mt-4 rounded-full border-2 border-gray-400"></div>
+        <input
+          type="radio"
+          name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+          [name]="'correctAnswer-' + optionIndex"
+          [value]="option.value"
+          [checked]="question.correctAnswers.includes(option.value)"
+          (change)="addCorrectAnswer(question, option.value)"
+          class="w-4 h-4 mt-4"
+        />
         <input
           type="text"
           [(ngModel)]="option.value"
@@ -176,7 +194,13 @@
       ></textarea>
       @for(option of question.options; track option; let optionIndex = $index){
       <div class="flex items-center gap-2 space-y-4">
-        <div class="w-4 h-4 mt-4 border-2 border-gray-400"></div>
+        <input
+          type="checkbox"
+          name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+          [id]="option.value"
+          (change)="addCorrectAnswer(question, option.value)"
+          class="w-4 h-4 mt-4"
+        />
         <input
           type="text"
           [(ngModel)]="option.value"
@@ -233,7 +257,8 @@
             type="radio"
             name="trueFalseOption{{ questionIndex }}"
             [(ngModel)]="question.correctAnswers[0]"
-            [value]="'true'"
+            value="true"
+            (change)="setCorrectAnswer(question, $event)"
             class="mr-2 w-4 h-4 accent-[#175CD3]"
           />
           True
@@ -244,7 +269,8 @@
             type="radio"
             name="trueFalseOption{{ questionIndex }}"
             [(ngModel)]="question.correctAnswers[0]"
-            [value]="'false'"
+            value="false"
+            (change)="setCorrectAnswer(question, $event)"
             class="mr-2 w-4 h-4 accent-[#175CD3]"
           />
           False

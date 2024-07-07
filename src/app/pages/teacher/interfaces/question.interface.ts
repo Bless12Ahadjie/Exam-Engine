@@ -4,11 +4,11 @@ export interface Options {
 }
 
 export interface Question {
-  type: 'multiple-choice' | 'short-answer' | 'boolean' | 'checkboxes';
   text: string;
+  type: 'multiple-choice' | 'short-answer' | 'boolean' | 'checkboxes';
   label: string;
-  options?: Options[];
-  correctAnswers: string[] | number[];
+  options: Options[];
+  correctAnswers: string[];
 }
 
 export interface ExamQuestion {
@@ -16,6 +16,22 @@ export interface ExamQuestion {
   questionInstruction: string;
   questionStartTime: string;
   questionEndTime: string;
-  questions: Question[];
+  question: Question[];
+  questionReceivers: string[];
+}
+
+
+export interface BackendQuestions {
+  questionTitle: string;
+  questionInstruction: string;
+  questionStartTime: string;
+  questionEndTime: string;
+  question: {
+    id: number;
+    text: string;
+    type: 'SINGLE' | 'MULTIPLE';
+    options: string[];
+    correctAnswers: string[] | number[];
+  }[];
   questionReceivers: string[];
 }
