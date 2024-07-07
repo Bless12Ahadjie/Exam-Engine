@@ -7,6 +7,10 @@ import {
 } from '@angular/forms';
 import { ExamSettings } from '../../interfaces/question.interface';
 import { ToasterService } from '../../../../shared/components/toaster/services/toaster.service';
+import {
+  persistedGet,
+  persistedSave,
+} from '../../../../shared/helpers/constants.utile';
 
 @Component({
   selector: 'app-questions-settings',
@@ -44,7 +48,7 @@ export class QuestionsSettingsComponent {
     if (this.settingsForm.valid) {
       const settingsData: ExamSettings = {
         ...this.settingsForm.value,
-        questionReceivers: this.settingsForm.value.questionReceivers.trim() // Ensure no leading/trailing spaces
+        questionReceivers: this.settingsForm.value.questionReceivers.trim(), // Ensure no leading/trailing spaces
       };
       this.saveToStorage(settingsData);
       this.settingsChanged.emit(settingsData);
@@ -55,14 +59,11 @@ export class QuestionsSettingsComponent {
   }
 
   saveToStorage(settingsData: ExamSettings) {
-    sessionStorage.setItem(
-      'exam_engine_settings',
-      JSON.stringify(settingsData)
-    );
+    persistedSave('exam_engine_settings', JSON.stringify(settingsData));
   }
 
   loadSettingsFromStorage() {
-    const savedSettings = sessionStorage.getItem('exam_engine_settings');
+    const savedSettings = persistedGet('exam_engine_settings');
     if (savedSettings) {
       const settingsData: ExamSettings = JSON.parse(savedSettings);
       this.settingsForm.patchValue(settingsData);

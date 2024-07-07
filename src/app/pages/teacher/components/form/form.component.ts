@@ -8,6 +8,10 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuestionComponent } from '../question/question.component';
 import { Question } from '../../interfaces/question.interface';
+import {
+  persistedGet,
+  persistedSave,
+} from '../../../../shared/helpers/constants.utile';
 
 @Component({
   selector: 'app-form',
@@ -38,14 +42,11 @@ export class FormComponent implements OnInit {
   }
 
   saveToStorage() {
-    sessionStorage.setItem(
-      'exam_engine_questions',
-      JSON.stringify(this.questions)
-    );
+    persistedSave('exam_engine_questions', JSON.stringify(this.questions));
   }
 
   loadFromStorage() {
-    const savedQuestions = sessionStorage.getItem('exam_engine_questions');
+    const savedQuestions = persistedGet('exam_engine_questions');
     if (savedQuestions) {
       this.questions = JSON.parse(savedQuestions);
     }

@@ -10,6 +10,11 @@ import { ToasterService } from '../../../../shared/components/toaster/services/t
 import { IResponse } from '../../../../interfaces/response.interface';
 import { RouterLink } from '@angular/router';
 import { QuestionsSettingsComponent } from '../questions-settings/questions-settings.component';
+import {
+  persistedGet,
+  persistedRemove,
+  persistedSave,
+} from '../../../../shared/helpers/constants.utile';
 
 @Component({
   selector: 'app-set-questions',
@@ -39,15 +44,12 @@ export class SetQuestionsComponent {
 
   saveToStorage() {
     if (this.settingsData) {
-      sessionStorage.setItem(
-        'exam_engine_settings',
-        JSON.stringify(this.settingsData)
-      );
+      persistedSave('exam_engine_settings', JSON.stringify(this.settingsData));
     }
   }
 
   loadFromStorage() {
-    const savedSettings = sessionStorage.getItem('exam_engine_settings');
+    const savedSettings = persistedGet('exam_engine_settings');
     if (savedSettings) {
       this.settingsData = JSON.parse(savedSettings);
     }
@@ -119,7 +121,7 @@ export class SetQuestionsComponent {
   }
 
   private removeQuestionDataFromStorage() {
-    sessionStorage.removeItem('exam_engine_settings');
-    sessionStorage.removeItem('exam_engine_questions');
+    persistedRemove('exam_engine_settings')
+    persistedRemove('exam_engine_questions')
   }
 }
