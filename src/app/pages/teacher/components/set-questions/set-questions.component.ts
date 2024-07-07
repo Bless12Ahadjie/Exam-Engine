@@ -15,11 +15,12 @@ import {
   persistedRemove,
   persistedSave,
 } from '../../../../shared/helpers/constants.utile';
+import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-set-questions',
   standalone: true,
-  imports: [FormComponent, RouterLink, QuestionsSettingsComponent],
+  imports: [FormComponent, RouterLink, QuestionsSettingsComponent, SpinnerComponent],
   templateUrl: './set-questions.component.html',
   styleUrl: './set-questions.component.scss',
 })
@@ -76,6 +77,8 @@ export class SetQuestionsComponent {
     };
 
     if (this.formIsValid()) {
+      this.isLoading = true;
+
       this._questionsService.createQuestion(data).subscribe({
         next: (response) => {
           this.responseHandler(response);
