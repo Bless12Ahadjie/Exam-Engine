@@ -26,6 +26,8 @@
 
     <div class="flex gap-2">
       <button
+        type="button"
+        (click)="previewQuestions()"
         class="text-black border-gray-400 text-xs mt-4 hover:bg-gray-100 bg-white border px-3 py-1 rounded-md transition-all ease-in 1s"
       >
         Preview
@@ -39,7 +41,7 @@
       </button>
     </div>
   </div>
-  <main class="md:w-[60%] md:mx-auto">
+  <main class="md:w-[80%] md:mx-auto">
     @if(currentView === 'questions') {
     <app-form (outputQuestions)="handleQuestions($event)" />
 

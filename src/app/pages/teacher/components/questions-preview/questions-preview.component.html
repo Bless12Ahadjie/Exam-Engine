@@ -1,0 +1,71 @@
+<section class="md:max-w-[80%] md:mx-auto md:p-[20px]">
+  <h2 class="text-2xl font-semibold mb-4">Preview Questions</h2>
+  @for(question of questions(); track question; let questionIndex = $index){
+  <div
+    class="bg-white border md:mb-[2%] mb-[3%] border-[#91959C] shadow-sm rounded-lg p-4 relative"
+  >
+    <p class="mb-4">{{ question.text }}</p>
+
+    @switch (question.type) { @case ('short-answer') {
+    <textarea
+      id="short-answer"
+      name="questionText"
+      placeholder="Type your answer here..."
+      class="focus:border-b-2 mt-[3%] hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+    ></textarea>
+
+    } @case ('multiple-choice') { @for(option of question.options; track option;
+    let optionIndex = $index){
+    <div class="flex items-center gap-2 space-y-4">
+      <input
+        type="radio"
+        name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+        [name]="'correctAnswer-' + optionIndex"
+        class="w-4 h-4 mt-4"
+      />
+      <label for="optionLabel{{ questionIndex }}{{ optionIndex }}">{{
+        option.value
+      }}</label>
+    </div>
+
+    } } @case ('checkboxes') { @for(option of question.options; track option;
+    let optionIndex = $index){
+    <div class="flex items-center gap-2 space-y-4">
+      <input
+        type="checkbox"
+        name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+        [id]="option.value"
+        class="w-4 h-4 mt-4"
+      />
+      <label for="optionLabel{{ questionIndex }}{{ optionIndex }}">{{
+        option.value
+      }}</label>
+    </div>
+
+    } } @case ('boolean') {
+    <div class="flex items-center gap-4 mt-4">
+      <label class="flex items-center gap-2">
+        <input
+          type="radio"
+          name="trueFalseOption{{ questionIndex }}"
+          value="true"
+          class="mr-2 w-4 h-4 accent-[#175CD3]"
+        />
+        True
+      </label>
+
+      <label class="flex items-center gap-2">
+        <input
+          type="radio"
+          name="trueFalseOption{{ questionIndex }}"
+          value="false"
+          class="mr-2 w-4 h-4 accent-[#175CD3]"
+        />
+        False
+      </label>
+    </div>
+    } }
+  </div>
+
+  }
+</section>

@@ -8,7 +8,7 @@ import {
 import { QuestionsService } from '../../services/questions/questions.service';
 import { ToasterService } from '../../../../shared/components/toaster/services/toaster.service';
 import { IResponse } from '../../../../interfaces/response.interface';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { QuestionsSettingsComponent } from '../questions-settings/questions-settings.component';
 import {
   persistedGet,
@@ -33,13 +33,10 @@ export class SetQuestionsComponent {
 
   private _questionsService = inject(QuestionsService);
   private _toaster = inject(ToasterService);
+  private _router = inject(Router);
 
   ngOnInit() {
     this.loadFromStorage();
-  }
-
-  emitQuestions() {
-    this.saveToStorage();
   }
 
   saveToStorage() {
@@ -143,5 +140,14 @@ export class SetQuestionsComponent {
   private removeQuestionDataFromStorage() {
     persistedRemove('exam_engine_settings');
     persistedRemove('exam_engine_questions');
+  }
+
+  previewQuestions(): void {
+    this.saveToStorage();
+
+    const previewUrl = this._router.serializeUrl(
+      this._router.createUrlTree(['/teacher', 'preview-questions'])
+    );
+    window.open(window.location.origin + previewUrl, '_blank');
   }
 }
