@@ -42,7 +42,10 @@ export class QuestionsSettingsComponent {
 
   saveSettings() {
     if (this.settingsForm.valid) {
-      const settingsData: ExamSettings = this.settingsForm.value;
+      const settingsData: ExamSettings = {
+        ...this.settingsForm.value,
+        questionReceivers: this.settingsForm.value.questionReceivers.trim() // Ensure no leading/trailing spaces
+      };
       this.saveToStorage(settingsData);
       this.settingsChanged.emit(settingsData);
       this.showToast('Settings saved successfully.', 'success');

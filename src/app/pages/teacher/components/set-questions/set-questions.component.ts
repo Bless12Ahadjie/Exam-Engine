@@ -1,6 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormComponent } from '../form/form.component';
-import { ExamQuestion, ExamSettings, Question } from '../../interfaces/question.interface';
+import {
+  ExamQuestion,
+  ExamSettings,
+  Question,
+} from '../../interfaces/question.interface';
 import { QuestionsService } from '../../services/questions/questions.service';
 import { ToasterService } from '../../../../shared/components/toaster/services/toaster.service';
 import { IResponse } from '../../../../interfaces/response.interface';
@@ -12,7 +16,7 @@ import { QuestionsSettingsComponent } from '../questions-settings/questions-sett
   standalone: true,
   imports: [FormComponent, RouterLink, QuestionsSettingsComponent],
   templateUrl: './set-questions.component.html',
-  styleUrl: './set-questions.component.scss'
+  styleUrl: './set-questions.component.scss',
 })
 export class SetQuestionsComponent {
   isLoading: boolean = false;
@@ -59,17 +63,17 @@ export class SetQuestionsComponent {
   }
 
   sendQuestions() {
+    const receiversArray = this.settingsData.questionReceivers
+      .split(',')
+      .map((email) => email.trim());
+
     const data: ExamQuestion = {
-      questionTitle: 'Software Testing',
-      questionInstruction: 'Mid-semester question',
-      questionStartTime: '2024-06-25T10:56:54.730Z',
-      questionEndTime: '2024-06-26T10:56:54.730Z',
+      questionTitle: this.settingsData.questionTitle,
+      questionInstruction: this.settingsData.questionInstruction,
+      questionStartTime: this.settingsData.questionStartTime,
+      questionEndTime: this.settingsData.questionEndTime,
       question: this.currentQuestions(),
-      questionReceivers: [
-        'nusetorsetsofia102@gmail.com',
-        'sandro@gmail.com',
-        'kwame@gmail.com',
-      ],
+      questionReceivers: receiversArray,
     };
 
     this._questionsService.createQuestion(data).subscribe({
@@ -86,6 +90,7 @@ export class SetQuestionsComponent {
     this.isLoading = false;
 
     if (response.status === 200) {
+      this.removeQuestionDataFromStorage();
       this.showToast(response.message, 'success');
     } else {
       this.showToast(response.message, 'error');
@@ -111,5 +116,10 @@ export class SetQuestionsComponent {
 
   showSettings() {
     this.currentView = 'settings';
+  }
+
+  private removeQuestionDataFromStorage() {
+    sessionStorage.removeItem('exam_engine_settings');
+    sessionStorage.removeItem('exam_engine_questions');
   }
 }

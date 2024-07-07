@@ -42,5 +42,5 @@ export interface ExamSettings {
   questionInstruction: string;
   questionStartTime: string;
   questionEndTime: string;
-  questionReceivers: string[];
+  questionReceivers: string;
 }
