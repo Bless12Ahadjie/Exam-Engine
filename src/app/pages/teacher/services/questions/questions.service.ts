@@ -3,7 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment.development';
 import { UserStore } from '../../../../store/user/user.store';
 import { IResponse } from '../../../../interfaces/response.interface';
-import { BackendQuestions, ExamQuestion } from '../../interfaces/question.interface';
+import {
+  BackendQuestions,
+  ExamQuestion,
+} from '../../interfaces/question.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -34,9 +37,9 @@ export class QuestionsService {
       questionEndTime: data.questionEndTime,
       question: data.question.map((value, index) => {
         return {
-          id: index,
+          id: index + 1,
           text: value.text,
-          type: value.type,
+          type: value.type === 'checkboxes' ? 'MULTIPLE' : 'SINGLE',
           options: value.options.map((option) => option.value),
           correctAnswers: value.correctAnswers,
         };
