@@ -65,27 +65,47 @@ export class SetQuestionsComponent {
   }
 
   sendQuestions() {
-    const receiversArray = this.settingsData.questionReceivers
+    const receiversArray = this.settingsData?.questionReceivers
       .split(',')
       .map((email) => email.trim());
 
     const data: ExamQuestion = {
-      questionTitle: this.settingsData.questionTitle,
-      questionInstruction: this.settingsData.questionInstruction,
-      questionStartTime: this.settingsData.questionStartTime,
-      questionEndTime: this.settingsData.questionEndTime,
+      questionTitle: this.settingsData?.questionTitle,
+      questionInstruction: this.settingsData?.questionInstruction,
+      questionStartTime: this.settingsData?.questionStartTime,
+      questionEndTime: this.settingsData?.questionEndTime,
       question: this.currentQuestions(),
       questionReceivers: receiversArray,
     };
 
-    this._questionsService.createQuestion(data).subscribe({
-      next: (response) => {
-        this.responseHandler(response);
-      },
-      error: (error) => {
-        this.errorHandler(error);
-      },
-    });
+    if (this.formIsValid()) {
+      this._questionsService.createQuestion(data).subscribe({
+        next: (response) => {
+          this.responseHandler(response);
+        },
+        error: (error) => {
+          this.errorHandler(error);
+        },
+      });
+    } else {
+      this._toaster.showToast({
+        message:
+          'Please set questions and add some relevant information on the settings page.',
+        type: 'error',
+        duration: 5000,
+      });
+    }
+  }
+
+  public formIsValid(): boolean {
+    const storageQuestions = persistedGet('exam_engine_questions');
+    const storageSettings = persistedGet('exam_engine_settings');
+
+    if (storageQuestions && storageSettings) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   responseHandler(response: IResponse) {
@@ -121,7 +141,7 @@ export class SetQuestionsComponent {
   }
 
   private removeQuestionDataFromStorage() {
-    persistedRemove('exam_engine_settings')
-    persistedRemove('exam_engine_questions')
+    persistedRemove('exam_engine_settings');
+    persistedRemove('exam_engine_questions');
   }
 }
