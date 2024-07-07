@@ -4,11 +4,13 @@ import { ExamQuestion, Question } from '../../interfaces/question.interface';
 import { QuestionsService } from '../../services/questions/questions.service';
 import { ToasterService } from '../../../../shared/components/toaster/services/toaster.service';
 import { IResponse } from '../../../../interfaces/response.interface';
+import { RouterLink } from '@angular/router';
+import { QuestionsSettingsComponent } from '../questions-settings/questions-settings.component';
 
 @Component({
   selector: 'app-set-questions',
   standalone: true,
-  imports: [FormComponent],
+  imports: [FormComponent, RouterLink, QuestionsSettingsComponent],
   templateUrl: './set-questions.component.html',
   styleUrl: './set-questions.component.scss'
 })
@@ -16,6 +18,7 @@ export class SetQuestionsComponent {
   isLoading: boolean = false;
   toggledCreateQuestion = signal<boolean>(false);
   currentQuestions = signal<Question[]>([]);
+  currentView: 'questions' | 'settings' = 'questions';
 
   private _questionsService = inject(QuestionsService);
   private _toaster = inject(ToasterService);
@@ -69,5 +72,13 @@ export class SetQuestionsComponent {
       type,
       duration: 3000,
     });
+  }
+
+  showQuestions() {
+    this.currentView = 'questions';
+  }
+
+  showSettings() {
+    this.currentView = 'settings';
   }
 }
