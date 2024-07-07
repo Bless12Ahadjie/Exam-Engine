@@ -1,0 +1,11 @@
+button {
+  &.active {
+    background-color: #d1e9ff;
+    color: #175cd3;
+  }
+
+  &.inactive {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}

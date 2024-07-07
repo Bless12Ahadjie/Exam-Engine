@@ -25,11 +25,30 @@ export class FormComponent implements OnInit {
   private elementRef!: ElementRef;
 
   ngOnInit() {
-    this.initializeQuestion();
+    this.loadFromStorage();
+
+    if (this.questions.length === 0) {
+      this.initializeQuestion();
+    }
   }
 
   emitQuestions() {
     this.outputQuestions.emit(this.questions);
+    this.saveToStorage();
+  }
+
+  saveToStorage() {
+    sessionStorage.setItem(
+      'exam_engine_questions',
+      JSON.stringify(this.questions)
+    );
+  }
+
+  loadFromStorage() {
+    const savedQuestions = sessionStorage.getItem('exam_engine_questions');
+    if (savedQuestions) {
+      this.questions = JSON.parse(savedQuestions);
+    }
   }
 
   initializeQuestion() {
