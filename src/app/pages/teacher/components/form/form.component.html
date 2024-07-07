@@ -117,6 +117,7 @@
         id="short-answer"
         name="questionText"
         placeholder="Type your answer here..."
+        [(ngModel)]="question.correctAnswers[0]"
         (change)="setCorrectAnswer(question, $event)"
         class="focus:border-b-2 mt-[3%] hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
       ></textarea>
