@@ -8,7 +8,7 @@ export interface Question {
   type: 'multiple-choice' | 'short-answer' | 'boolean' | 'checkboxes';
   label: string;
   options: Options[];
-  correctAnswers: string[] | number[];
+  correctAnswers: string[];
 }
 
 export interface ExamQuestion {
@@ -29,7 +29,7 @@ export interface BackendQuestions {
   question: {
     id: number;
     text: string;
-    type: string;
+    type: 'SINGLE' | 'MULTIPLE';
     options: string[];
     correctAnswers: string[] | number[];
   }[];
