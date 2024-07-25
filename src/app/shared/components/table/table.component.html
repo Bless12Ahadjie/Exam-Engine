@@ -1,33 +1,60 @@
-<section class="bg-white p-5 rounded-lg shadow">
-  <h2 class="text-2xl font-bold text-blue-600 mb-4">Recent Test Results</h2>
+<section class="bg-white rounded-lg border-2 border-[#EDEFF5]">
+  <h2 class="font-bold text-black text-sm p-5">Exam Records</h2>
   <div class="overflow-x-auto">
-      <table class="w-full whitespace-nowrap">
-          <thead class="bg-gray-200">
-              <tr>
-                  <th class="text-left py-3 px-2 rounded-l-lg">Student Name</th>
-                  <th class="text-left py-3 px-2">Exam</th>
-                  <th class="text-left py-3 px-2">Submission Time</th>
-                  <th class="text-left py-3 px-2">Status</th>
-                  <th class="text-left py-3 px-2 rounded-r-lg">Score</th>
-              </tr>
-          </thead>
-          <tbody class="bg-white-100  ">
-              <tr class="hover:bg-slate-200">
-                  <td class="py-3 px-2">John Doe</td>
-                  <td class="py-3 px-2">Math 101</td>
-                  <td class="py-3 px-2">2024-07-20 10:30 AM</td>
-                  <td class="py-3 px-2">Assessed</td>
-                  <td class="py-3 px-2">95%</td>
-              </tr>
+    <table class="w-full whitespace-nowrap">
+      <thead class="bg-[#EDEDED]">
+        <tr>
+          @for(th of tableHeadings(); track $index) {
+          <th class="text-left text-sm py-4 px-2">{{ th }}</th>
+          }
+          <th class="text-left text-sm py-4 px-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white-100">
+        @if(showLoadingState()) { @for (placeholder of placeholder; track
+        $index) {
+        <tr>
+          <td class="animate-pulse" colspan="5">
+            <div class="h-5 bg-slate-200 rounded mb-3 w-full"></div>
+          </td>
+        </tr>
 
-              <tr class="hover:bg-slate-200">
-                  <td class="py-3 px-2">John Doe</td>
-                  <td class="py-3 px-2">Math 101</td>
-                  <td class="py-3 px-2">2024-07-20 10:30 AM</td>
-                  <td class="py-3 px-2">Assessed</td>
-                  <td class="py-3 px-2">95%</td>
-              </tr>
-          </tbody>
-      </table>
+        } } @else { @for (td of tableData(); track $index) {
+        <tr class="hover:bg-gray-50 py-10">
+          <td class="py-3 px-2 text-base max-w-[200px] truncate">
+            {{ td.questionTitle }}
+          </td>
+          <td class="py-3 px-2 text-sm max-w-[65px] truncate">
+            {{ td.questionStatus }}
+          </td>
+          <td class="py-3 px-2 text-sm max-w-[186px] truncate">
+            {{ td.questionStartTime | date : "fullDate" }}
+          </td>
+          <td class="py-3 px-2 text-sm max-w-[186px] truncate">
+            {{ td.questionEndTime | date : "fullDate" }}
+          </td>
+          <td class="py-3 px-2 text-sm max-w-[96px] truncate">
+            {{ td.passMark }}
+          </td>
+          <td>
+            <a
+              [routerLink]="['../analytics', td.questionId]"
+              class="text-blue-500 hover:text-blue-600"
+            >
+              <button type="button">View</button>
+            </a>
+            |
+            <a href="#" class="text-red-500 hover:text-red-600">Delete</a>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td class="py-6 px-8 text-center h-[calc(95vh-177px)]" colspan="5">
+            No exam records found.
+          </td>
+        </tr>
+        } }
+      </tbody>
+    </table>
   </div>
 </section>
