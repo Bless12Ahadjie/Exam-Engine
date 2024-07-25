@@ -1,6 +1,7 @@
 import { PayLoadData } from '../../interfaces/token.interface';
 
 export const ACCESS_TOKEN_KEY: string = 'EXAM_ENGINE_TOKEN';
+export const USER_ID: string = 'EXAM_ENGINE_USER_ID';
 
 export const persistedSave = (key: string, value: string) => {
   sessionStorage.setItem(key, value);

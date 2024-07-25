@@ -10,7 +10,7 @@ import { ToasterService } from '../../../../shared/components/toaster/services/t
 import {
   persistedGet,
   persistedSave,
-} from '../../../../shared/helpers/constants.utile';
+} from '../../../../shared/helpers/constants.helper';
 
 @Component({
   selector: 'app-questions-settings',
