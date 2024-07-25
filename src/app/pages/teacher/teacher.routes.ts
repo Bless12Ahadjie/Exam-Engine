@@ -3,6 +3,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { SetQuestionsComponent } from './components/set-questions/set-questions.component';
 import { QuestionsPreviewComponent } from './components/questions-preview/questions-preview.component';
+import { ManageExamsComponent } from './manage-exams/manage-exams.component';
 
 export const routes: Routes = [
   {
@@ -21,8 +22,17 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'manage-exams',
+    component: ManageExamsComponent,
+  },
+  {
     path: 'analytics',
-    component: AnalyticsComponent,
+    children: [
+      {
+        path: ':id',
+        component: AnalyticsComponent
+      }
+    ]
   },
   {
     path: 'preview-questions',

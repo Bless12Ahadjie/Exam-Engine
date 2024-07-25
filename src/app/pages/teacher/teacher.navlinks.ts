@@ -14,12 +14,6 @@ export const teacherNavLinks: INavLinks = {
       // children: [{ title: '', routerLink: '' }],
     },
     {
-      title: 'Analytics',
-      defaultIconSrc: '/assets/icons/analytics.svg',
-      routerLink: 'analytics',
-      // children: [{ title: '', routerLink: '' }],
-    },
-    {
       title: 'Settings',
       defaultIconSrc: '/assets/icons/settings.svg',
       routerLink: 'settings',

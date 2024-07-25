@@ -14,13 +14,18 @@ import {
   persistedGet,
   persistedRemove,
   persistedSave,
-} from '../../../../shared/helpers/constants.utile';
+} from '../../../../shared/helpers/constants.helper';
 import { SpinnerComponent } from '../../../../shared/components/spinner/spinner.component';
 
 @Component({
   selector: 'app-set-questions',
   standalone: true,
-  imports: [FormComponent, RouterLink, QuestionsSettingsComponent, SpinnerComponent],
+  imports: [
+    FormComponent,
+    RouterLink,
+    QuestionsSettingsComponent,
+    SpinnerComponent,
+  ],
   templateUrl: './set-questions.component.html',
   styleUrl: './set-questions.component.scss',
 })

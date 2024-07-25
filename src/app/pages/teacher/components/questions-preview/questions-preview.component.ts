@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Question } from '../../interfaces/question.interface';
-import { persistedGet } from '../../../../shared/helpers/constants.utile';
+import { persistedGet } from '../../../../shared/helpers/constants.helper';
 
 @Component({
   selector: 'app-questions-preview',

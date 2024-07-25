@@ -1,10 +1,8 @@
-import {
-  HttpInterceptorFn,
-} from '@angular/common/http';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { TokenService } from '../../services/token/token.service';
 import { AuthService } from '../../services/auth/auth.service';
-import { decodeJwt } from '../../shared/helpers/constants.utile';
+import { decodeJwt } from '../../shared/helpers/constants.helper';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
@@ -12,7 +10,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const accessToken: string | null = tokenService.getToken();
 
   if (accessToken && !req.url.includes('/login')) {
-    
     const payloadData = decodeJwt(accessToken);
 
     if (payloadData) {
