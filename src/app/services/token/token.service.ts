@@ -5,7 +5,8 @@ import {
   persistedGet,
   persistedRemove,
   persistedSave,
-} from '../../shared/helpers/constants.utile';
+  USER_ID,
+} from '../../shared/helpers/constants.helper';
 import { PayLoadData } from '../../interfaces/token.interface';
 import { UserStore } from '../../store/user/user.store';
 
@@ -26,6 +27,7 @@ export class TokenService {
     if (token) {
       const decodedToken: PayLoadData | null = decodeJwt(token);
       if (decodedToken) {
+        persistedSave(USER_ID, decodedToken.jti);
         this.userStore.setUserId(decodedToken.jti);
       }
     }
