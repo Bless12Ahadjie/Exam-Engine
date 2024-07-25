@@ -27,7 +27,12 @@ export const routes: Routes = [
   },
   {
     path: 'analytics',
-    component: AnalyticsComponent,
+    children: [
+      {
+        path: ':id',
+        component: AnalyticsComponent
+      }
+    ]
   },
   {
     path: 'preview-questions',
