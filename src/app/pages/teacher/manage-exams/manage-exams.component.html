@@ -1,1 +1,5 @@
-<p>manage-exams works!</p>
+<app-table
+  [tableHeadings]="columns"
+  [tableData]="questions()"
+  [showLoadingState]="isLoading"
+/>
