@@ -1,10 +1,10 @@
 <section>
   <div>
-    <h1 class="font-semibold text-lg">Dashboard</h1>
+    <h1 class="font-semibold text-lg">Analytics</h1>
   </div>
 
   <div class="my-2">
-    <div class="grid grid-cols-1 gap-5 md:grid-cols-5">
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-4">
       @for (shortcutCard of shortcutCards(); track $index) {
       <app-shortcut-card
         [props]="{
@@ -13,12 +13,18 @@
           value: shortcutCard.value,
           link: shortcutCard.link
         }"
+        (emitView)="setView($event)"
       />
       }
     </div>
   </div>
 
   <main>
-    <router-outlet />
+    <app-analytics-table
+      title="Students Records"
+      [tableHeadings]="columns"
+      [tableData]="studentRecords()"
+      [showLoadingState]="isLoading"
+    />
   </main>
 </section>
