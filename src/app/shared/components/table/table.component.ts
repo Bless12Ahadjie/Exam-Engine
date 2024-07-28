@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './table.component.scss',
 })
 export class TableComponent {
+  title = input.required<string>()
   tableHeadings = input.required<string[]>();
   tableData = input.required<TableData[]>();
   showLoadingState = input.required<boolean>();

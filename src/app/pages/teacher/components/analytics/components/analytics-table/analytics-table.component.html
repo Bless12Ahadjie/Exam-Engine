@@ -7,7 +7,6 @@
           @for(th of tableHeadings(); track $index) {
           <th class="text-left text-sm py-4 px-2">{{ th }}</th>
           }
-          <th class="text-left text-sm py-4 px-2">Actions</th>
         </tr>
       </thead>
       <tbody class="bg-white-100">
@@ -22,29 +21,19 @@
         } } @else { @for (td of tableData(); track $index) {
         <tr class="hover:bg-gray-50 py-10">
           <td class="py-3 px-2 text-base max-w-[200px] truncate">
-            {{ td.questionTitle }}
+            {{ td.name }}
           </td>
           <td class="py-3 px-2 text-sm max-w-[65px] truncate">
-            {{ td.questionStatus }}
+            {{ td.id }}
           </td>
           <td class="py-3 px-2 text-sm max-w-[186px] truncate">
-            {{ td.questionStartTime | date : "medium" }}
-          </td>
-          <td class="py-3 px-2 text-sm max-w-[186px] truncate">
-            {{ td.questionEndTime | date : "medium" }}
+            {{ td.gender }}
           </td>
           <td class="py-3 px-2 text-sm max-w-[96px] truncate">
-            {{ td.passMark }}
+            {{ td.email }}
           </td>
-          <td>
-            <a
-              [routerLink]="['../analytics', td.questionId]"
-              class="text-blue-500 hover:text-blue-600"
-            >
-              <button type="button">View</button>
-            </a>
-            |
-            <a href="#" class="text-red-500 hover:text-red-600">Delete</a>
+          <td class="py-3 px-2 text-sm max-w-[186px] truncate">
+            {{ td.dateCreated | date : "medium" }}
           </td>
         </tr>
         } @empty {
