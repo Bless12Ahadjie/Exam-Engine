@@ -4,4 +4,5 @@ export interface StudentsTableData {
   gender: string;
   email: string;
   dateCreated: string;
+  questionId: string;
 }

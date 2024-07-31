@@ -36,7 +36,7 @@ export const routes: Routes = [
         component: AnalyticsComponent,
       },
       {
-        path: 'snapshots/:id',
+        path: 'snapshots/:id/:questionId',
         component: SnapshotsComponent
       }
     ],

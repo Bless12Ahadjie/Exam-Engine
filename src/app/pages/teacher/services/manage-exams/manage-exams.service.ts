@@ -3,7 +3,10 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment.development';
 import { UserStore } from '../../../../store/user/user.store';
-import { IResponseData, TableData } from '../../manage-exams/manage-exams.interface';
+import {
+  IResponseData,
+  ISnapshots,
+} from '../../manage-exams/manage-exams.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +23,15 @@ export class ManageExamsService {
       `${
         environment.BACKEND_API_BASE_URL
       }/exam-engine/api/v1/teacher/questions/${this.userStore.userId()}/limited-details`
+    );
+  }
+
+  public getStudentSnapshots(
+    studentId: string,
+    questionId: string
+  ): Observable<ISnapshots> {
+    return this._http.get<ISnapshots>(
+      `${environment.BACKEND_API_BASE_URL}/exam-engine/api/v1/teacher/questions/${studentId}/snapshots/${questionId}`
     );
   }
 }
