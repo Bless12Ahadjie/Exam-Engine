@@ -106,11 +106,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getTotal() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudents(this.questionId())
       .subscribe({
         next: (response) => {
-          console.log('Total: ', response);
+          this.isLoading = false;
+
           this.studentRecords.set(response.students);
 
           this.shortcutCards.set(
@@ -129,11 +132,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getDone() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsDone(this.questionId())
       .subscribe({
         next: (response) => {
-          console.log('Done: ', response);
+          this.isLoading = false;
+
           this.studentRecords.set(response.students);
 
           this.shortcutCards.set(
@@ -152,11 +158,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getPass() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsPass(this.questionId())
       .subscribe({
         next: (response) => {
-          console.log('Pass: ', response);
+          this.isLoading = false;
+
           this.studentRecords.set(response.students);
 
           this.shortcutCards.set(
@@ -175,11 +184,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getFail() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsFailed(this.questionId())
       .subscribe({
         next: (response) => {
-          console.log('Fail: ', response);
+          this.isLoading = false;
+
           this.studentRecords.set(response.students);
 
           this.shortcutCards.set(
