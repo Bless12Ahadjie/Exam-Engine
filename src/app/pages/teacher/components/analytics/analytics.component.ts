@@ -58,13 +58,6 @@ export class AnalyticsComponent implements OnInit {
   studentRecords = signal<StudentsTableData[]>([]);
   isLoading: boolean = false;
 
-  currentView:
-    | 'total-students'
-    | 'completed-students'
-    | 'pass-students'
-    | 'fail-students'
-    | '' = 'total-students';
-
   _activatedRoute = inject(ActivatedRoute);
   _analyticsService = inject(AnalyticsService);
 
@@ -84,7 +77,6 @@ export class AnalyticsComponent implements OnInit {
       | 'fail-students'
       | ''
   ) {
-    this.currentView = view;
     switch (view) {
       case 'total-students':
         this.getTotal();
@@ -141,6 +133,9 @@ export class AnalyticsComponent implements OnInit {
       .getTotalNumberOfStudentsDone(this.questionId())
       .subscribe({
         next: (response) => {
+          console.log('Done: ', response);
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'completed-students') {
@@ -161,6 +156,9 @@ export class AnalyticsComponent implements OnInit {
       .getTotalNumberOfStudentsPass(this.questionId())
       .subscribe({
         next: (response) => {
+          console.log('Pass: ', response);
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'pass-students') {
@@ -181,6 +179,9 @@ export class AnalyticsComponent implements OnInit {
       .getTotalNumberOfStudentsFailed(this.questionId())
       .subscribe({
         next: (response) => {
+          console.log('Fail: ', response);
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'fail-students') {
