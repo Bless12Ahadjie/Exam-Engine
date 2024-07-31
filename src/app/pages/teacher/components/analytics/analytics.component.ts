@@ -58,13 +58,6 @@ export class AnalyticsComponent implements OnInit {
   studentRecords = signal<StudentsTableData[]>([]);
   isLoading: boolean = false;
 
-  currentView:
-    | 'total-students'
-    | 'completed-students'
-    | 'pass-students'
-    | 'fail-students'
-    | '' = 'total-students';
-
   _activatedRoute = inject(ActivatedRoute);
   _analyticsService = inject(AnalyticsService);
 
@@ -84,7 +77,6 @@ export class AnalyticsComponent implements OnInit {
       | 'fail-students'
       | ''
   ) {
-    this.currentView = view;
     switch (view) {
       case 'total-students':
         this.getTotal();
@@ -114,11 +106,14 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getTotal() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudents(this.questionId())
       .subscribe({
         next: (response) => {
-          console.log('Total: ', response);
+          this.isLoading = false;
+
           this.studentRecords.set(response.students);
 
           this.shortcutCards.set(
@@ -137,10 +132,16 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getDone() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsDone(this.questionId())
       .subscribe({
         next: (response) => {
+          this.isLoading = false;
+
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'completed-students') {
@@ -157,10 +158,16 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getPass() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsPass(this.questionId())
       .subscribe({
         next: (response) => {
+          this.isLoading = false;
+
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'pass-students') {
@@ -177,10 +184,16 @@ export class AnalyticsComponent implements OnInit {
   }
 
   getFail() {
+    this.isLoading = true;
+
     this._analyticsService
       .getTotalNumberOfStudentsFailed(this.questionId())
       .subscribe({
         next: (response) => {
+          this.isLoading = false;
+
+          this.studentRecords.set(response.students);
+
           this.shortcutCards.set(
             this.shortcutCards().map((card) => {
               if (card.link === 'fail-students') {

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { TableData } from '../../../../manage-exams/manage-exams.interface';
 import { StudentsTableData } from './analytics.interface';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-analytics-table',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './analytics-table.component.html',
   styleUrl: './analytics-table.component.scss'
 })
