@@ -4,7 +4,7 @@ import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { SetQuestionsComponent } from './components/set-questions/set-questions.component';
 import { QuestionsPreviewComponent } from './components/questions-preview/questions-preview.component';
 import { ManageExamsComponent } from './manage-exams/manage-exams.component';
-import { AnalyticsTableComponent } from './components/analytics/components/analytics-table/analytics-table.component';
+import { ManageExamsTableComponent } from './components/analytics/components/manage-exams-table/manage-exams-table.component';
 
 export const routes: Routes = [
   {
@@ -28,25 +28,11 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: ManageExamsComponent,
+        component: ManageExamsTableComponent,
       },
       {
-        path: ':id',
+        path: 'analytics/:id',
         component: AnalyticsComponent,
-      },
-      {
-        path: ':id/total',
-        component: AnalyticsComponent,
-      },
-    ],
-  },
-  {
-    path: 'analytics/:id',
-    component: AnalyticsComponent,
-    children: [
-      {
-        path: 'total-students',
-        component: AnalyticsTableComponent,
       },
     ],
   },
