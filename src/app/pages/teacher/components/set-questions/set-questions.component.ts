@@ -75,6 +75,7 @@ export class SetQuestionsComponent {
     const data: ExamQuestion = {
       questionTitle: this.settingsData?.questionTitle,
       questionInstruction: this.settingsData?.questionInstruction,
+      passMark: this.settingsData?.passMark,
       questionStartTime: this.settingsData?.questionStartTime,
       questionEndTime: this.settingsData?.questionEndTime,
       question: this.currentQuestions(),

@@ -35,6 +35,7 @@ export class QuestionsSettingsComponent {
     this.settingsForm = this.fb.group({
       questionTitle: ['', Validators.required],
       questionInstruction: ['', Validators.required],
+      passMark: ['', Validators.required],
       questionStartTime: ['', Validators.required],
       questionEndTime: ['', Validators.required],
       questionReceivers: [
