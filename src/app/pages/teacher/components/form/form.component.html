@@ -105,88 +105,112 @@
     </div>
     } @switch (question.type) { @case ('short-answer') {
     <ng-container>
-      <textarea
-        id="question"
-        name="questionText"
-        [(ngModel)]="question.text"
-        placeholder="Write..."
-        class="focus:border-b-2 hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
-      ></textarea>
+      <div>
+        <textarea
+          id="question"
+          name="questionText"
+          [(ngModel)]="question.text"
+          placeholder="Write..."
+          class="focus:border-b-2 hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+        ></textarea>
 
-      <textarea
-        id="short-answer"
-        name="questionText"
-        placeholder="Type your answer here..."
-        [(ngModel)]="question.correctAnswers[0]"
-        (change)="setCorrectAnswer(question, $event)"
-        class="focus:border-b-2 mt-[3%] hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
-      ></textarea>
+        <textarea
+          id="short-answer"
+          name="questionText"
+          placeholder="Type your answer here..."
+          [(ngModel)]="question.correctAnswers[0]"
+          (change)="setCorrectAnswer(question, $event)"
+          class="focus:border-b-2 mt-[3%] hover:border-b-2 px-2 w-full transition-all ease-in 1s resize-none border-b-[#175CD3] outline-none"
+        ></textarea>
+      </div>
+      <div class="flex items-center gap-4 justify-end">
+        <p>Score</p>
+        <input
+          type="number"
+          id="score"
+          [(ngModel)]="question.score"
+          class="border-2 pl-1 resize-none transition-all ease-in w-[70px] 1s border-b-[#175CD3] outline-none"
+        />
+      </div>
     </ng-container>
 
     } @case ('multiple-choice') {
     <ng-container>
-      <textarea
-        id="question"
-        name="questionText"
-        [(ngModel)]="question.text"
-        placeholder="Write..."
-        class="focus:border-b-2 px-2 w-full hover:border-b-2 transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
-      ></textarea>
-      @for(option of question.options; track option; let optionIndex = $index){
-      <div class="flex items-center gap-2 space-y-4">
-        <input
-          type="radio"
-          name="optionLabel{{ questionIndex }}{{ optionIndex }}"
-          [name]="'correctAnswer-' + optionIndex"
-          [value]="option.value"
-          [checked]="question.correctAnswers.includes(option.value)"
-          (change)="addCorrectAnswer(question, option.value)"
-          class="w-4 h-4 mt-4"
-        />
-        <input
-          type="text"
-          [(ngModel)]="option.value"
-          name="optionLabel{{ questionIndex }}{{ optionIndex }}"
-          [placeholder]="option.label"
-          class="focus:border-b-2 px-2 resize-none transition-all ease-in 1s hover:border-b-2 focus:border-b-[#175CD3] outline-none"
-        />
-        <button
-          (click)="deleteOption(question, optionIndex)"
-          type="button"
-          title="Remove option"
-          class="hover:bg-gray-100 p-2 rounded-full"
-        >
-          <svg
-            width="14"
-            height="16"
-            viewBox="0 0 16 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      <div>
+        <textarea
+          id="question"
+          name="questionText"
+          [(ngModel)]="question.text"
+          placeholder="Write..."
+          class="focus:border-b-2 px-2 w-full hover:border-b-2 transition-all ease-in 1s resize-none focus:border-b-[#175CD3] outline-none"
+        ></textarea>
+        @for(option of question.options; track option; let optionIndex =
+        $index){
+        <div class="flex items-center gap-2 space-y-4">
+          <input
+            type="radio"
+            name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+            [name]="'correctAnswer-' + optionIndex"
+            [value]="option.value"
+            [checked]="question.correctAnswers.includes(option.value)"
+            (change)="addCorrectAnswer(question, option.value)"
+            class="w-4 h-4 mt-4"
+          />
+          <input
+            type="text"
+            [(ngModel)]="option.value"
+            name="optionLabel{{ questionIndex }}{{ optionIndex }}"
+            [placeholder]="option.label"
+            class="focus:border-b-2 px-2 resize-none transition-all ease-in 1s hover:border-b-2 focus:border-b-[#175CD3] outline-none"
+          />
+          <button
+            (click)="deleteOption(question, optionIndex)"
+            type="button"
+            title="Remove option"
+            class="hover:bg-gray-100 p-2 rounded-full"
           >
-            <path
-              d="M9.96725 6.5L9.67879 14M5.6884 14L5.39994 6.5M13.7066 3.82547C13.9916 3.86851 14.2756 3.91456 14.5586 3.96358M13.7066 3.82547L12.8168 15.3938C12.7416 16.3707 11.927 17.125 10.9473 17.125H4.4199C3.44015 17.125 2.62557 16.3707 2.55042 15.3938L1.66055 3.82547M13.7066 3.82547C12.7513 3.6812 11.7848 3.57071 10.8086 3.49527M0.808594 3.96358C1.09157 3.91456 1.37557 3.86851 1.66055 3.82547M1.66055 3.82547C2.61591 3.6812 3.58234 3.57071 4.55859 3.49527M10.8086 3.49527V2.73182C10.8086 1.74902 10.0497 0.928526 9.06741 0.897103C8.60794 0.882405 8.14663 0.875 7.68359 0.875C7.22055 0.875 6.75924 0.882405 6.29977 0.897103C5.31747 0.928526 4.55859 1.74902 4.55859 2.73182V3.49527M10.8086 3.49527C9.77739 3.41558 8.73523 3.375 7.68359 3.375C6.63195 3.375 5.58979 3.41558 4.55859 3.49527"
-              stroke="#404653"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+            <svg
+              width="14"
+              height="16"
+              viewBox="0 0 16 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.96725 6.5L9.67879 14M5.6884 14L5.39994 6.5M13.7066 3.82547C13.9916 3.86851 14.2756 3.91456 14.5586 3.96358M13.7066 3.82547L12.8168 15.3938C12.7416 16.3707 11.927 17.125 10.9473 17.125H4.4199C3.44015 17.125 2.62557 16.3707 2.55042 15.3938L1.66055 3.82547M13.7066 3.82547C12.7513 3.6812 11.7848 3.57071 10.8086 3.49527M0.808594 3.96358C1.09157 3.91456 1.37557 3.86851 1.66055 3.82547M1.66055 3.82547C2.61591 3.6812 3.58234 3.57071 4.55859 3.49527M10.8086 3.49527V2.73182C10.8086 1.74902 10.0497 0.928526 9.06741 0.897103C8.60794 0.882405 8.14663 0.875 7.68359 0.875C7.22055 0.875 6.75924 0.882405 6.29977 0.897103C5.31747 0.928526 4.55859 1.74902 4.55859 2.73182V3.49527M10.8086 3.49527C9.77739 3.41558 8.73523 3.375 7.68359 3.375C6.63195 3.375 5.58979 3.41558 4.55859 3.49527"
+                stroke="#404653"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        }
+        <button
+          (click)="addOption(question)"
+          type="button"
+          title="Add option"
+          class="text-[#175CD3] text-xs ml-6 mt-4 hover:bg-[#D1E9FF] px-2 py-1 rounded-sm transition-all ease-in 1s"
+        >
+          Add Option
         </button>
       </div>
-
-      }
-      <button
-        (click)="addOption(question)"
-        type="button"
-        title="Add option"
-        class="text-[#175CD3] text-xs ml-6 mt-4 hover:bg-[#D1E9FF] px-2 py-1 rounded-sm transition-all ease-in 1s"
-      >
-        Add Option
-      </button>
+      <div class="flex items-center gap-4 justify-end">
+        <p>Score</p>
+        <input
+          type="number"
+          id="score"
+          [(ngModel)]="question.score"
+          class="border-2 pl-1 resize-none transition-all ease-in w-[70px] 1s border-b-[#175CD3] outline-none"
+        />
+      </div>
     </ng-container>
     } @case ('checkboxes') {
     <ng-container>
-      <textarea
+      <div>
+        <textarea
         id="question"
         name="questionText"
         [(ngModel)]="question.text"
@@ -242,10 +266,22 @@
       >
         Add Option
       </button>
+      </div>
+
+      <div class="flex items-center gap-4 justify-end">
+        <p>Score</p>
+        <input
+          type="number"
+          id="score"
+          [(ngModel)]="question.score"
+          class="border-2 pl-1 resize-none transition-all ease-in w-[70px] 1s border-b-[#175CD3] outline-none"
+        />
+      </div>
     </ng-container>
     } @case ('boolean') {
     <ng-container>
-      <textarea
+      <div>
+        <textarea
         id="question"
         name="questionText"
         [(ngModel)]="question.text"
@@ -276,6 +312,17 @@
           />
           False
         </label>
+      </div>
+      </div>
+
+      <div class="flex items-center gap-4 justify-end">
+        <p>Score</p>
+        <input
+          type="number"
+          id="score"
+          [(ngModel)]="question.score"
+          class="border-2 pl-1 resize-none transition-all ease-in w-[70px] 1s border-b-[#175CD3] outline-none"
+        />
       </div>
     </ng-container>
     } }

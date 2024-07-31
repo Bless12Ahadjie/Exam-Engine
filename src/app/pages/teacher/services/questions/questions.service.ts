@@ -33,6 +33,7 @@ export class QuestionsService {
     const backendData: BackendQuestions = {
       questionTitle: data.questionTitle,
       questionInstruction: data.questionInstruction,
+      passMark: data.passMark,
       questionStartTime: data.questionStartTime,
       questionEndTime: data.questionEndTime,
       question: data.question.map((value, index) => {

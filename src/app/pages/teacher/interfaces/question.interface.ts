@@ -9,11 +9,13 @@ export interface Question {
   label: string;
   options: Options[];
   correctAnswers: string[];
+  score: number;
 }
 
 export interface ExamQuestion {
   questionTitle: string;
   questionInstruction: string;
+  passMark: number;
   questionStartTime: string;
   questionEndTime: string;
   question: Question[];
@@ -24,6 +26,7 @@ export interface ExamQuestion {
 export interface BackendQuestions {
   questionTitle: string;
   questionInstruction: string;
+  passMark: number;
   questionStartTime: string;
   questionEndTime: string;
   question: {
@@ -40,6 +43,7 @@ export interface BackendQuestions {
 export interface ExamSettings {
   questionTitle: string;
   questionInstruction: string;
+  passMark: number;
   questionStartTime: string;
   questionEndTime: string;
   questionReceivers: string;
