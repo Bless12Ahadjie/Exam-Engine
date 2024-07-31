@@ -9,6 +9,7 @@ export interface Question {
   label: string;
   options: Options[];
   correctAnswers: string[];
+  score: number;
 }
 
 export interface ExamQuestion {

@@ -59,6 +59,7 @@ export class FormComponent implements OnInit {
       text: 'Untitled Question',
       options: [{ label: 'Option 1', value: 'option 1' }],
       correctAnswers: [],
+      score: 0,
     };
     this.questions.push(newQuestion);
     this.emitQuestions();
@@ -71,6 +72,7 @@ export class FormComponent implements OnInit {
       text: '',
       options: [],
       correctAnswers: [],
+      score: 0,
     };
     this.questions.push(newQuestion);
     this.emitQuestions();
