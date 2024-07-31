@@ -5,6 +5,7 @@ import { SetQuestionsComponent } from './components/set-questions/set-questions.
 import { QuestionsPreviewComponent } from './components/questions-preview/questions-preview.component';
 import { ManageExamsComponent } from './manage-exams/manage-exams.component';
 import { ManageExamsTableComponent } from './components/analytics/components/manage-exams-table/manage-exams-table.component';
+import { SnapshotsComponent } from './components/snapshots/snapshots.component';
 
 export const routes: Routes = [
   {
@@ -34,6 +35,10 @@ export const routes: Routes = [
         path: 'analytics/:id',
         component: AnalyticsComponent,
       },
+      {
+        path: 'snapshots/:id',
+        component: SnapshotsComponent
+      }
     ],
   },
   {
