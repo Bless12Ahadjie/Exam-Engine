@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import {inject, Injectable, signal} from '@angular/core';
 import {
   ACCESS_TOKEN_KEY,
   decodeJwt,
@@ -15,6 +15,8 @@ import { UserStore } from '../../store/user/user.store';
 })
 export class TokenService {
   readonly userStore = inject(UserStore);
+
+  userId = signal<string>('')
 
   constructor() {}
 
@@ -34,7 +36,16 @@ export class TokenService {
     return token;
   }
 
+
   public removeToken(): void {
     persistedRemove(ACCESS_TOKEN_KEY);
+  }
+
+  private setUserId(id: string){
+    this.userId.set((id))
+  }
+
+  getUserId(){
+    return this.userId()
   }
 }

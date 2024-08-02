@@ -1,4 +1,4 @@
-<div class="h-[190px]">
+<div class="min-h-[190px] h-auto">
   <div class="w-[100%]  pb-3">
     <table>
       <thead class=" bg-[#F4F6FA] h-[48px] ">
@@ -18,28 +18,37 @@
       </tr>
 
       <tbody >
-        @for (data of tablebody; track data.id){
+        @for (data of tablebody; track data.questionId){
           <tr class="py-2">
 
             <td class="flex justify-start items-center">
               <img src="assets/icons/test-icon.svg">
-              {{data.test}}
+              {{data.questionTitle}}
             </td>
             <td>
-              {{data.id}}
+              {{data.questionId}}
             </td>
             <td>
-              {{data.expired}}
+              {{data.questionStatus | titlecase}}
             </td>
             <td>
-              {{data.score}}
+              <button (click)="GoToViewMore(data.questionId,data.questionTitle)" class="bg-[#1849A9] text-white py-1 px-[30px] rounded-[4px]">View more</button>
             </td>
-           
+
 
 
           </tr>
         }
       </tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>
+          <div *ngIf="tablebody.length === 0" class="">
+            <p class="font-bold text-[20px]">No exam completed yet</p>
+          </div>
+        </td>
+      </tr>
 
     </table>
   </div>

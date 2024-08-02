@@ -1,17 +1,23 @@
 <div class="mt-100px mx-auto max-w-[95rem] py-8 px-2 sm:px-6 lg:px-8">
-  <div class="">
-    <div class="flex justify-between items-center">
-      <p class="text-[20px] text=[#101828] font-semibold mb-[20px]">Upcoming Exams</p>
-      <p class="text-[14px font-light]">Upcoming exams</p>
+  <div class="flex flex-col gap-2">
+    <div class="">
+      <div class="flex justify-between items-center">
+        <p class="text-[20px] text=[#101828] font-semibold mb-[20px]">Upcoming Exams</p>
+        <p class="text-[14px font-light]">Upcoming exams</p>
+      </div>
+
+      <app-upcoming-exam-table
+
+      ></app-upcoming-exam-table>
+
     </div>
+    <div class="shadow-lg py-6 mt-6">
+      <p class="text-[20px] text=[#101828] font-semibold mb-[20px]">Recently Taken Test</p>
+      <app-recent-test-result
 
-    <app-upcoming-exam-table></app-upcoming-exam-table>
+      ></app-recent-test-result>
 
-  </div>
-  <div class="shadow-lg py-6">
-    <p class="text-[20px] text=[#101828] font-semibold mb-[20px]">Recent Test Results</p>
-    <app-recent-test-result></app-recent-test-result>
-
+    </div>
   </div>
 
 </div>

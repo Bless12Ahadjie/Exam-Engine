@@ -1,48 +1,58 @@
-<div class="h-[190px]">
-  <div class="w-[100%] border-gray-300 shadow-md pb-3">
+<div class="min-h-[190px] max-h-[300px] h-auto overflow-x-hidden overflow-y-auto">
+  <div class="w-[100%]  border-gray-300 shadow-md pb-3">
     <table>
-      <thead class=" bg-[#F4F6FA] h-[48px] ">
-      <tr class="px-3">
+      <thead class=" bg-[#F4F6FA] h-[48px] w-[100%] ">
+      <tr class="px-3 ">
         @for(head of tableHead; track $index){
-        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66] pl-5">{{ head.name | titlecase}}</th>
-        <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{head.id | uppercase}}</th>
-        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.time | titlecase }}</th>
-        <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.expire | titlecase }}</th>
-        <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{ head.update | titlecase }}</th>
+          <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66] pl-5">{{ head.name | titlecase}}</th>
+          <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{head.id | uppercase}}</th>
+          <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.time | titlecase }}</th>
+          <th class="w-[15%] text-left text-[14px] font-medium text-[#474D66]">{{ head.expire | titlecase }}</th>
+          <th class="w-[10%] text-left text-[14px] font-medium text-[#474D66]">{{ head.update | titlecase }}</th>
+
         }
       </tr>
       </thead>
 
-      <tr>
-
-      </tr>
       <tbody  >
-        @for (data of tablebody; track data.id){
-      <tr class="py-2 mt-5">
+        @for (data of tablebody; track data.questionId){
 
-        <td class="flex justify-start items-center">
-          <img src="assets/icons/test-icon.svg" alt="test">
-          {{data.test}}
-        </td>
-          <td>
-            {{data.id}}
-          </td>
-          <td>
-            {{data.time}}
-          </td>
-          <td>
-            {{data.expire}}
-          </td>
-          <td>
-            <button (click)="showModal()" class="bg-[#1849A9] text-white py-1 px-[30px] rounded-[4px]">Start</button>
-          </td>
+          <tr class="py-2 mt-5">
+
+            <td class="flex justify-start items-center">
+              <img src="assets/icons/test-icon.svg" alt="test">
+              {{data.questionTitle}}
+            </td>
+            <td>
+              {{data.questionId}}
+            </td>
+            <td>
+              {{data.questionStartTime | duration}}
+            </td>
+            <td>
+              {{data.questionEndTime | date: 'mm/dd/yyy'}}
+            </td>
+            <td>
+              <button (click)="showModal(data.questionId)" class="bg-[#1849A9] text-white py-1 px-[30px] rounded-[4px]">Start</button>
+            </td>
 
 
-      </tr>
+          </tr>
         }
       </tbody>
+      <tr>
+        <td></td>
+        <td></td>
+        <td>
+          <div *ngIf="tablebody.length === 0" class="">
+            <p class="font-bold text-[20px]">No Upcoming exam</p>
+          </div>
+        </td>
+      </tr>
+
 
     </table>
+
   </div>
 
 </div>
@@ -50,7 +60,7 @@
 
 @if(isModalOpen){
   <app-start-mosal
-  (closeModalEvent)="closeModal($event)"
+    (closeModalEvent)="closeModal($event)"
   >
 
   </app-start-mosal>

@@ -1,138 +1,33 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component,EventEmitter,OnInit, Output } from '@angular/core';
-interface Question {
-  id: number;
-  text: string;
-  type: 'single' | 'multiple';
-  options: string[];
-  correctAnswers: number[];
-}
+import {NgClass, NgFor, NgIf} from '@angular/common';
+import {Component, EventEmitter, inject, Input, OnInit, Output} from '@angular/core';
+import {answerFromStudent, AnswersPayload, Test} from "../../../interfaces/response.interface";
+import {AuthService} from "../../../services/auth/auth.service";
+
 @Component({
   selector: 'app-question-card',
   standalone: true,
-  imports: [NgFor,NgIf],
+  imports: [NgFor, NgIf, NgClass],
   templateUrl: './question-card.component.html',
   styleUrl: './question-card.component.scss'
 })
 export class QuestionCardComponent implements OnInit {
-  @Output() onSendAnswers = new EventEmitter();
+
+  authService = inject(AuthService);
   @Output() isSubmitActive = new EventEmitter<boolean>();
-  ngOnInit() {
-    this.currentQuestion = this.questions[0];
-  }
-  currentQuestion!: Question;
-  currentQuestionIndex: number = 0;
+  @Output() onSendAnswers = new EventEmitter<answerFromStudent[]>();
+  @Input() Questions: Test[] = [];
+  @Input() answeredQuestions!:AnswersPayload;
+  @Input() isfromScoresPage!: boolean;
+
+
+  currentQuestion!: Test[];
   selectedAnswers: { [questionId: number]: number[] } = {};
 
-  sendAnswers(){
-    if(this.selectedAnswers[this.currentQuestion.id]?.length > 0){
-      this.isSubmitActive.emit(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-       this.onSendAnswers.emit(this.selectedAnswers);
-
-    }
-
-
-  }
-
-  questions: Question[] = [
-    {
-      id: 1,
-      text: 'What is the capital of France?',
-      type: 'single',
-      options: ['London', 'Berlin', 'Paris', 'Madrid'],
-      correctAnswers: [2]
-    },
-    {
-      id: 2,
-      text: 'Which of the following are primary colors?',
-      type: 'multiple',
-      options: ['Red', 'Green', 'Blue', 'Yellow'],
-      correctAnswers: [0, 2, 3]
-    },
-    {
-      id: 3,
-      text: 'Who wrote "Romeo and Juliet"?',
-      type: 'single',
-      options: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
-      correctAnswers: [1]
-    },
-    {
-      id: 4,
-      text: 'Which of these elements are noble gases?',
-      type: 'multiple',
-      options: ['Helium', 'Oxygen', 'Neon', 'Chlorine'],
-      correctAnswers: [0, 2]
-    },
-    {
-      id: 5,
-      text: 'What is the largest planet in our solar system?',
-      type: 'single',
-      options: ['Mars', 'Jupiter', 'Saturn', 'Neptune'],
-      correctAnswers: [1]
-    },
-    {
-      id: 6,
-      text: 'Which of these countries are in South America?',
-      type: 'multiple',
-      options: ['Brazil', 'Spain', 'Peru', 'Mexico'],
-      correctAnswers: [0, 2]
-    },
-    {
-      id: 7,
-      text: 'What is the chemical symbol for gold?',
-      type: 'single',
-      options: ['Ag', 'Au', 'Fe', 'Cu'],
-      correctAnswers: [1]
-    },
-    {
-      id: 8,
-      text: 'Which of these are programming languages?',
-      type: 'multiple',
-      options: ['Python', 'Cobra', 'Java', 'Leopard'],
-      correctAnswers: [0, 2]
-    },
-    {
-      id: 9,
-      text: 'Who painted the Mona Lisa?',
-      type: 'single',
-      options: ['Vincent van Gogh', 'Pablo Picasso', 'Leonardo da Vinci', 'Michelangelo'],
-      correctAnswers: [2]
-    },
-    {
-      id: 10,
-      text: 'Which of these are types of renewable energy?',
-      type: 'multiple',
-      options: ['Solar', 'Coal', 'Wind', 'Nuclear'],
-      correctAnswers: [0, 2]
-    },
-    {
-      id: 11,
-      text: 'What is the largest ocean on Earth?',
-      type: 'single',
-      options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
-      correctAnswers: [3]
-    },
-    {
-      id: 12,
-      text: 'Which of these animals are mammals?',
-      type: 'multiple',
-      options: ['Dolphin', 'Shark', 'Bat', 'Eagle'],
-      correctAnswers: [0, 2]
-    }
-  ];
-
-
-
-  nextQuestion() {
-    if (this.currentQuestionIndex < this.questions.length - 1) {
-      this.currentQuestionIndex++;
-    }
-  }
-
-  previousQuestion() {
-    if (this.currentQuestionIndex > 0) {
-      this.currentQuestionIndex--;
+  ngOnInit() {
+    this.authService.checkAuthStatus();
+    this.currentQuestion = this.Questions;
+    if (this.isfromScoresPage){
+      this.Questions = this.answeredQuestions.answers
     }
   }
 
@@ -141,7 +36,8 @@ export class QuestionCardComponent implements OnInit {
       this.selectedAnswers[questionId] = [];
     }
 
-    if (this.currentQuestion.type === 'single') {
+    const question = this.Questions.find(q => q.id === questionId);
+    if (question && question.type === 'SINGLE') {
       this.selectedAnswers[questionId] = [optionIndex];
     } else {
       const index = this.selectedAnswers[questionId].indexOf(optionIndex);
@@ -151,9 +47,48 @@ export class QuestionCardComponent implements OnInit {
         this.selectedAnswers[questionId].push(optionIndex);
       }
     }
+
+  }
+
+  checkAllQuestionsAnswered() {
+    const allAnswered = this.Questions.every(q => this.selectedAnswers[q.id]?.length > 0);
+    this.isSubmitActive.emit(allAnswered);
+  }
+
+  formatAndSendAnswers() {
+    const formattedAnswers:answerFromStudent[] = Object.entries(this.selectedAnswers).map(([questionId, selectedIndexes]) => ({
+      id: parseInt(questionId),
+      answer: this.getAnswerString(parseInt(questionId), selectedIndexes)
+    }));
+
+    this.onSendAnswers.emit(formattedAnswers);
+    this.checkAllQuestionsAnswered()
+
+  }
+
+  private getAnswerString(questionId: number, selectedIndexes: number[]): string {
+    const question = this.Questions.find(q => q.id === questionId);
+    if (!question) return '';
+
+    if (question.type === 'SINGLE') {
+      return question.options[selectedIndexes[0]] || '';
+    } else {
+      return selectedIndexes.map(index => question.options[index]).join(', ');
+    }
   }
 
   isOptionSelected(questionId: number, optionIndex: number): boolean {
     return this.selectedAnswers[questionId]?.includes(optionIndex) || false;
+  }
+
+
+  isCorrectAnswer(question: Test, option: string): boolean {
+    return question.correctAnswers.includes(option);
+  }
+
+
+
+  trackById(index: number, question: Test): number {
+    return question.id;
   }
 }
