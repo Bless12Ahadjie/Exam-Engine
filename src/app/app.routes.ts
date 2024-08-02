@@ -6,6 +6,9 @@ import { ExamPageComponent } from './shared/components/exam-page/exam-page.compo
 import { AuthComponent } from './pages/auth/auth.component';
 import { StudentLayoutComponent } from './pages/student-layout/student-layout.component';
 import { TeacherComponent } from './pages/teacher/teacher.component';
+import {ScoresPageComponent} from "./shared/components/scores-page/scores-page.component";
+import {PostExamScreenComponent} from "./shared/components/post-exam-screen/post-exam-screen.component";
+
 
 export const routes: Routes = [
   {
@@ -13,6 +16,7 @@ export const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full',
   },
+
   {
     path: '',
     component: AuthComponent,
@@ -40,6 +44,15 @@ export const routes: Routes = [
         path: 'exam',
         component: ExamPageComponent,
       },
+      {
+        path:'exam-done',
+        component: PostExamScreenComponent
+      }
+      ,
+      {
+        path:'exam-result',
+        component: ScoresPageComponent
+      }
     ],
   },
   {

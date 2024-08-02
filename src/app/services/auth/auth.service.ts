@@ -39,4 +39,8 @@ export class AuthService {
     this._tokenService.removeToken();
     this._router.navigate(['/login']);
   }
+
+  checkAuthStatus(): void {
+    const token = this._tokenService.getToken();
+  }
 }

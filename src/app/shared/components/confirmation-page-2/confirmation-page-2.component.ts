@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {StudentService} from "../../../services/student/student.service";
 
 @Component({
   selector: 'app-confirmation-page-2',
@@ -9,7 +10,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './confirmation-page-2.component.html',
   styleUrl: './confirmation-page-2.component.scss'
 })
-export class ConfirmationPage2Component {
+export class ConfirmationPage2Component implements OnInit{
+  studentService = inject(StudentService)
+  Question_Id: string | null = '';
   mediaRecorder: MediaRecorder | null = null;
   audioStream: MediaStream | null = null;
   screenStream: MediaStream | null = null;
@@ -22,6 +25,9 @@ export class ConfirmationPage2Component {
   private screenshotInterval!: number;
   private cameraInterval!: number;
 
+  ngOnInit() {
+    this.Question_Id = localStorage.getItem('idQ')
+  }
 
 
   async toggleRecordScreen() {
@@ -42,7 +48,12 @@ export class ConfirmationPage2Component {
         this.mediaRecorder.onstop = () => {
           const blob = new Blob(chunks, { type: 'video/webm' });
           const url = URL.createObjectURL(blob);
-          console.log('Screen recording finished. Video URL:', url);
+          this.studentService.sendPictureToBackend(url,this.Question_Id).subscribe(
+            {
+              next: () => {
+              }
+            }
+          )
           this.isRecording = false;
         };
 
@@ -52,7 +63,7 @@ export class ConfirmationPage2Component {
         // Take screenshots every 2 minutes
         this.screenshotInterval = setInterval(async () => {
           // Screenshot logic
-        }, 2000); // 2 minutes interval
+        }, 10000);
 
         // Add event listener for visibilitychange
         document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
@@ -137,9 +148,13 @@ export class ConfirmationPage2Component {
           // @ts-ignore
           ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
           const cameraUrl = canvas.toDataURL('image/png');
-          console.log('Camera snapshot taken:', cameraUrl);
-          // Save or process the camera snapshot as needed
-        }, 5000); // 5 seconds interval
+          this.studentService.sendPictureToBackend(cameraUrl,this.Question_Id).subscribe(
+            {
+              next: () => {
+              }
+            }
+          )
+        }, 10000);
       } catch (err) {
         console.error('Error accessing camera:', err);
         this.istoggleSurrounding = false;
